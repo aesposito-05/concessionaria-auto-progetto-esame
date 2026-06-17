@@ -2,9 +2,17 @@
 
 **Sistema Informativo per Concessionaria Auto**
 
-*Nome studente: [da completare]*
-*Corso: [da completare]*
-*Data: [da completare]*
+*Nome studente: Antonio Esposito*
+*Corso: Ingegneria e Scienze Informatiche per la Cybersecurity — Università degli Studi di Napoli Parthenope*
+*Data: 30/06/2026*
+
+---
+
+## Introduzione
+
+Questo documento descrive il progetto di un sistema informativo per la gestione di una concessionaria automobilistica, sviluppato come progetto d'esame. Il sistema permette di gestire il catalogo dei veicoli, l'anagrafica dei clienti (privati e aziende), le vendite e gli interventi di manutenzione, attraverso un'applicazione web realizzata in Django.
+
+Il documento è organizzato in cinque parti: la progettazione concettuale del database (modello Entità-Relazione), la sua traduzione in uno schema relazionale (modello logico), l'implementazione dell'applicazione web, le istruzioni per installarla e avviarla, ed eventuali approfondimenti sulla sicurezza.
 
 ---
 
@@ -14,7 +22,7 @@
 2. Progettazione logica
 3. Implementazione del sistema informativo
 4. Istruzioni per installazione e avvio
-5. Bonus (eventuale simulazione di attacco)
+5. Bonus (sicurezza)
 
 ---
 
@@ -328,4 +336,4 @@ Dopo `loaddata dati_esempio.json` sono disponibili questi account:
 
 ## 5. Bonus
 
-*[Da completare, se realizzato]*
+In questa versione del progetto non è stata implementata la simulazione di attacco facoltativa prevista dalla traccia (SQL injection, attacco a dizionario o brute-force). Si segnala comunque che l'uso dell'ORM di Django per tutte le query (mai SQL grezzo concatenato con input dell'utente) protegge nativamente dalla SQL injection, e che l'autenticazione tramite `django.contrib.auth` applica già hashing delle password e validazioni minime di robustezza.
