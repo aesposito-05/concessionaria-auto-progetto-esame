@@ -204,26 +204,30 @@ Il sistema è implementato con **Django 6.0** (backend e template engine) e **Bo
 ### 3.2 Struttura del progetto
 
 ```
-progetto_concessionaria_parziale/   ← cartella radice
+progetto_concessionaria_parziale/   ← root del repository (clonare qui)
+├── .gitignore
+├── requirements.txt
+├── manage.py                       ← punto di ingresso Django
+├── dati_esempio.json               ← dump con dati di esempio
 ├── venv/                           ← virtual environment (escluso da git)
-└── progetto_concessionaria_parziale/
-    ├── manage.py
-    ├── db.sqlite3                  ← database (escluso da git)
-    ├── dati_esempio.json           ← dump con dati di esempio
-    ├── concessionaria_project/     ← configurazione Django
-    │   ├── settings.py
-    │   └── urls.py
-    └── gestionale/                 ← unica app Django
-        ├── models.py
-        ├── views.py
-        ├── forms.py
-        ├── urls.py
-        ├── admin.py
-        ├── management/commands/popola_db.py
-        ├── migrations/
-        └── templates/
-            ├── gestionale/         ← template dell'app
-            └── registration/       ← override template login Django
+├── concessionaria_project/         ← configurazione Django
+│   ├── settings.py
+│   └── urls.py
+├── gestionale/                     ← unica app Django
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── urls.py
+│   ├── admin.py
+│   ├── management/commands/popola_db.py
+│   ├── migrations/
+│   └── templates/
+│       ├── gestionale/             ← template dell'app
+│       └── registration/           ← override template login Django
+└── documentazione/
+    ├── Documentazione.md
+    ├── schema_logico.sql
+    └── immagini/er_completo.png
 ```
 
 ### 3.3 Funzionalità implementate
@@ -276,25 +280,21 @@ venv\Scripts\activate
 source venv/bin/activate
 
 # 3. Installa le dipendenze
-pip install django
+pip install -r requirements.txt
 
-# 4. Entra nella cartella del progetto Django
-cd progetto_concessionaria_parziale
-
-# 5. Esegui le migrazioni
+# 4. Esegui le migrazioni
 python manage.py migrate
 
-# 6. (Opzionale) Carica i dati di esempio
+# 5. Carica i dati di esempio
 python manage.py loaddata dati_esempio.json
-# oppure usa il comando personalizzato che crea anche gli utenti:
-python manage.py popola_db
 
-# 7. Crea un superuser per l'area amministrativa (opzionale)
-python manage.py createsuperuser
-
-# 8. Avvia il server di sviluppo
+# 6. Avvia il server di sviluppo
 python manage.py runserver
 ```
+
+> **Nota per lo sviluppo**: `python manage.py popola_db` è un comando alternativo
+> che rigenera i dati di esempio da zero (utile se si vuole ripartire da un
+> database vuoto senza usare il dump).
 
 ### Accesso
 
@@ -313,15 +313,16 @@ Dopo l'avvio, il sistema è raggiungibile all'indirizzo: **http://127.0.0.1:8000
 
 ### Credenziali dati di esempio
 
-Se è stato eseguito `popola_db`, sono disponibili questi account (password: `Password123!`):
+Dopo `loaddata dati_esempio.json` sono disponibili questi account:
 
-| Username | Tipo |
-|---|---|
-| `mario_rossi` | Cliente privato |
-| `anna_verdi` | Cliente privato |
-| `luca_neri` | Cliente privato |
-| `flotta_srl` | Azienda |
-| `tecno_auto` | Azienda |
+| Username | Password | Tipo |
+|---|---|---|
+| `admin` | `Admin123!` | Amministratore (area `/admin/`) |
+| `mario_rossi` | `Password123!` | Cliente privato |
+| `anna_verdi` | `Password123!` | Cliente privato |
+| `luca_neri` | `Password123!` | Cliente privato |
+| `flotta_srl` | `Password123!` | Azienda |
+| `tecno_auto` | `Password123!` | Azienda |
 
 ---
 
