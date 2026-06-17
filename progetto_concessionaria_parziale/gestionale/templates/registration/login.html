@@ -1,0 +1,40 @@
+{% extends "gestionale/base.html" %}
+
+{% block title %}Accedi – Concessionaria Auto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h2 class="mb-4">Accedi</h2>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% if form.errors %}
+        <div class="alert alert-danger">
+          Nome utente o password non corretti. Riprova.
+        </div>
+      {% endif %}
+
+      <div class="mb-3">
+        <label for="id_username" class="form-label">Nome utente</label>
+        <input type="text" name="username" id="id_username"
+               class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+               autofocus required>
+      </div>
+      <div class="mb-3">
+        <label for="id_password" class="form-label">Password</label>
+        <input type="password" name="password" id="id_password"
+               class="form-control {% if form.password.errors %}is-invalid{% endif %}"
+               required>
+      </div>
+
+      <button type="submit" class="btn btn-dark w-100">Accedi</button>
+    </form>
+
+    <p class="mt-3 text-center text-muted small">
+      Non hai un account? <a href="{% url 'registrazione_scelta' %}">Registrati</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

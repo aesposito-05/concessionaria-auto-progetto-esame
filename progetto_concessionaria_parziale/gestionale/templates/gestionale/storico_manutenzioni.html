@@ -1,0 +1,60 @@
+{% extends "gestionale/base.html" %}
+
+{% block title %}Storico manutenzioni – Concessionaria Auto{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Storico manutenzioni</h2>
+
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <form method="get" class="row g-3 align-items-end">
+      <div class="col-sm-8 col-md-6">
+        <label for="id_auto" class="form-label">Seleziona veicolo</label>
+        <select name="auto" id="id_auto" class="form-select">
+          <option value="">-- scegli un veicolo --</option>
+          {% for a in auto_list %}
+            <option value="{{ a.pk }}" {% if auto_selezionata.pk == a.pk %}selected{% endif %}>
+              {{ a.marca }} {{ a.modello }}{% if a.anno %} ({{ a.anno }}){% endif %}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-sm-4 col-md-2">
+        <button type="submit" class="btn btn-dark w-100">Mostra</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if auto_selezionata %}
+  <h5 class="mb-3">
+    Manutenzioni per <strong>{{ auto_selezionata }}</strong>
+    {% if auto_selezionata.anno %}({{ auto_selezionata.anno }}){% endif %}
+  </h5>
+
+  {% if manutenzioni %}
+  <div class="table-responsive">
+    <table class="table table-hover shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Data intervento</th>
+          <th>Descrizione</th>
+          <th class="text-end">Costo (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in manutenzioni %}
+        <tr>
+          <td>{{ m.data_intervento|default:"–" }}</td>
+          <td>{{ m.descrizione|default:"–" }}</td>
+          <td class="text-end">{% if m.costo %}€ {{ m.costo }}{% else %}–{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="alert alert-info">Nessuna manutenzione registrata per questo veicolo.</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

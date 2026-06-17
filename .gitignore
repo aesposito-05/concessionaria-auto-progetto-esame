@@ -1,0 +1,26 @@
+# Virtual environment
+venv/
+
+# Database SQLite
+progetto_concessionaria_parziale/db.sqlite3
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# File di sistema
+.DS_Store
+Thumbs.db
+
+# File di configurazione locale / segreti
+*.env
+.env
+
+# File temporanei Claude Code
+crea_admin.py
+.claude/
+
+# Coverage e test
+.coverage
+htmlcov/

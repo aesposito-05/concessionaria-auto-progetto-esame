@@ -1,0 +1,69 @@
+{% extends "gestionale/base.html" %}
+
+{% block title %}{{ auto }} – Concessionaria Auto{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'ricerca_auto' %}">Catalogo</a></li>
+    <li class="breadcrumb-item active">{{ auto }}</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-7">
+    <h2 class="mb-1">{{ auto.marca }} {{ auto.modello }}</h2>
+    {% if auto.anno %}
+      <p class="text-muted mb-3">Anno: {{ auto.anno }}</p>
+    {% endif %}
+
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row" class="text-muted" style="width:35%">Marca</th>
+          <td>{{ auto.marca }}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-muted">Modello</th>
+          <td>{{ auto.modello }}</td>
+        </tr>
+        {% if auto.anno %}
+        <tr>
+          <th scope="row" class="text-muted">Anno</th>
+          <td>{{ auto.anno }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row" class="text-muted">Fornitore</th>
+          <td>{{ auto.fornitore }}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-muted">Stato</th>
+          <td>
+            {% if auto.stato == 'disponibile' %}
+              <span class="badge bg-success">Disponibile</span>
+            {% elif auto.stato == 'venduta' %}
+              <span class="badge bg-secondary">Venduta</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">In manutenzione</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-muted">Prezzo</th>
+          <td class="fs-4 fw-bold">€ {{ auto.prezzo }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex gap-2 mt-2">
+      <a href="{% url 'storico_manutenzioni' %}?auto={{ auto.pk }}" class="btn btn-outline-dark btn-sm">
+        Storico manutenzioni
+      </a>
+      <a href="{% url 'ricerca_auto' %}" class="btn btn-outline-secondary btn-sm">
+        Torna al catalogo
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "gestionale/base.html" %}
+
+{% block title %}Catalogo auto – Concessionaria Auto{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Catalogo veicoli disponibili</h2>
+
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <form method="get" class="row g-3 align-items-end">
+      <div class="col-sm-6 col-md-3">
+        <label for="id_marca" class="form-label">Marca</label>
+        <input type="text" name="marca" id="id_marca"
+               value="{{ form.marca.value|default:'' }}"
+               class="form-control" placeholder="es. BMW">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label for="id_modello" class="form-label">Modello</label>
+        <input type="text" name="modello" id="id_modello"
+               value="{{ form.modello.value|default:'' }}"
+               class="form-control" placeholder="es. Serie 3">
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <label for="id_prezzo_min" class="form-label">Prezzo min (€)</label>
+        <input type="number" name="prezzo_min" id="id_prezzo_min"
+               value="{{ form.prezzo_min.value|default:'' }}"
+               class="form-control" min="0" step="500">
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <label for="id_prezzo_max" class="form-label">Prezzo max (€)</label>
+        <input type="number" name="prezzo_max" id="id_prezzo_max"
+               value="{{ form.prezzo_max.value|default:'' }}"
+               class="form-control" min="0" step="500">
+      </div>
+      <div class="col-md-2 d-flex gap-2">
+        <button type="submit" class="btn btn-dark flex-fill">Cerca</button>
+        <a href="{% url 'ricerca_auto' %}" class="btn btn-outline-secondary">Reset</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if auto_list is not None %}
+  {% if auto_list %}
+    <p class="text-muted mb-3">{{ auto_list|length }} veicolo/i trovato/i</p>
+    <div class="row g-3">
+      {% for auto in auto_list %}
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ auto.marca }} {{ auto.modello }}</h5>
+            <p class="card-text">
+              {% if auto.anno %}<span class="text-muted">Anno: {{ auto.anno }}</span><br>{% endif %}
+              <strong class="fs-5">€ {{ auto.prezzo }}</strong>
+            </p>
+          </div>
+          <div class="card-footer bg-white border-top-0">
+            <a href="{% url 'dettaglio_auto' auto.pk %}" class="btn btn-sm btn-outline-dark">
+              Vedi scheda
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">Nessun veicolo corrisponde ai criteri di ricerca.</div>
+  {% endif %}
+{% endif %}
+{% endblock %}
