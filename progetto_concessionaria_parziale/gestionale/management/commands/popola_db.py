@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
         # --- Auto ---
         auto_dati = [
-            ('Panda', 12500, 2021, 'disponibile', 'Fiat', fi),
+            ('Panda', 12500, 2021, 'venduta', 'Fiat', fi),
             ('500', 15900, 2022, 'disponibile', 'Fiat', fi),
             ('Tipo', 18700, 2020, 'disponibile', 'Fiat', fi),
             ('Serie 3', 42000, 2023, 'disponibile', 'BMW', fe),

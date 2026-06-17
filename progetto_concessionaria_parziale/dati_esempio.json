@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1200000$t9UsdWBkosEeZCx9HhRugw$ClMegPkjTHP3+ZmGxpycnUbFGo+MPh0+zfgG4jMDt68=",
-    "last_login": null,
+    "last_login": "2026-06-17T15:00:29.311Z",
     "is_superuser": false,
     "username": "mario_rossi",
     "first_name": "",
@@ -108,6 +108,14 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "vbcnjmjvypdncyl0r691j2om3robd09i",
+  "fields": {
+    "session_data": ".eJxVjDEOgzAMAP_iuYqCQ0hg7N43RDG2C21FJAJT1b9XSAztene6N6S8b1Paq6xpZhiggcsvozw-ZTkEP_JyL2Ysy7bOZI7EnLaaW2F5Xc_2bzDlOsEALTEhkaoN2ndRQ9SYQ8eB2KFzwixWbGyUvOsDIjJh9GJbRvKeFT5fCzQ4nA:1wZrkj:2WBnUqx7ny8l1x73dkRg_CXkPEXu0UBH6D_YqrpEUE0",
+    "expire_date": "2026-07-01T15:00:29.323Z"
+  }
+},
+{
   "model": "gestionale.marca",
   "pk": 1,
   "fields": {
@@ -186,7 +194,7 @@
     "modello": "Panda",
     "prezzo": "12500.00",
     "anno": 2021,
-    "stato": "disponibile",
+    "stato": "venduta",
     "marca": 1,
     "fornitore": 1
   }
