@@ -2,8 +2,8 @@
 
 **Sistema Informativo per Concessionaria Auto**
 
-*Nome studente: Antonio Esposito*
-*Corso: Ingegneria e Scienze Informatiche per la Cybersecurity — Università degli Studi di Napoli Parthenope*
+*Nome studente: Antonio Esposito*  
+*Corso: Ingegneria e Scienze Informatiche per la Cybersecurity — Università degli Studi di Napoli Parthenope*  
 *Data: 30/06/2026*
 
 ---
@@ -85,15 +85,127 @@ La specializzazione è **totale**, poiché ogni cliente registrato nel sistema d
 
 Il modello logico relazionale è stato derivato dal modello E-R applicando le regole standard: ogni entità diventa una tabella, i suoi attributi diventano colonne e il suo identificatore diventa chiave primaria; ogni relazione 1:N si traduce in una chiave esterna inserita nella tabella dal lato N (per esempio Vendita riceve `id_cliente` e `id_dipendente`); la relazione N:M tra Vendita e Auto, già risolta a livello concettuale dall'entità associativa Dettaglio_Vendita, diventa a livello logico una tabella con chiave primaria composta dalle due chiavi esterne coinvolte.
 
-### 2.2 Derivazione della generalizzazione
+### 2.2 Elenco delle entità e degli attributi
+
+Di seguito lo schema sintetico di ogni tabella, nella notazione `TABELLA( attributo PK, attributo, attributo FK )`:
+
+**AUTO**
+```
+AUTO(
+  id_auto PK,
+  modello,
+  prezzo,
+  anno,
+  stato,
+  id_marca FK,
+  id_fornitore FK
+)
+```
+
+**MARCA**
+```
+MARCA(
+  id_marca PK,
+  nome,
+  paese
+)
+```
+
+**FORNITORE**
+```
+FORNITORE(
+  id_fornitore PK,
+  nome,
+  paese
+)
+```
+
+**CLIENTE**
+```
+CLIENTE(
+  id_cliente PK,
+  email,
+  telefono,
+  citta,
+  tipo_cliente
+)
+```
+
+**PRIVATO**
+```
+PRIVATO(
+  id_cliente PK/FK,
+  codice_fiscale,
+  nome,
+  cognome,
+  data_nascita
+)
+```
+
+**AZIENDA**
+```
+AZIENDA(
+  id_cliente PK/FK,
+  partita_iva,
+  ragione_sociale,
+  settore
+)
+```
+
+**DIPENDENTE**
+```
+DIPENDENTE(
+  id_dipendente PK,
+  nome,
+  cognome,
+  ruolo,
+  stipendio
+)
+```
+
+**VENDITA**
+```
+VENDITA(
+  id_vendita PK,
+  data_vendita,
+  importo_totale,
+  id_cliente FK,
+  id_dipendente FK
+)
+```
+
+**DETTAGLIO_VENDITA**
+```
+DETTAGLIO_VENDITA(
+  id_vendita PK/FK,
+  id_auto PK/FK,
+  quantita,
+  prezzo_unitario
+)
+```
+
+**MANUTENZIONE**
+```
+MANUTENZIONE(
+  id_manutenzione PK,
+  data_intervento,
+  descrizione,
+  costo,
+  id_auto FK
+)
+```
+
+*Nota: in `PRIVATO`, `AZIENDA` e `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella — è proprio la tecnica usata per realizzare la generalizzazione (paragrafo 2.3) e la tabella ponte N:M (paragrafo 2.1).*
+
+### 2.3 Derivazione della generalizzazione
 
 Per tradurre la generalizzazione Cliente → Privato/Azienda è stata adottata la strategia "tabella per ogni entità": una tabella `cliente` contiene gli attributi comuni, mentre `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Questa strategia è preferibile rispetto a un'unica tabella con tutti gli attributi (che produrrebbe molti valori NULL) perché mantiene lo schema normalizzato, al costo di richiedere un JOIN per ricostruire il profilo completo di un cliente.
 
-### 2.3 Semplificazioni e adattamenti
+### 2.4 Semplificazioni e adattamenti
 
 Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dichiarativo, che ogni riga di `cliente` abbia esattamente una riga corrispondente in `privato` oppure in `azienda`: il vincolo di totalità ed esclusività della partizione richiederebbe un trigger che verifichi l'esistenza incrociata fra tabelle ogni volta che viene inserito un cliente. Per restare entro i limiti di un progetto didattico, è stato introdotto in `cliente` un attributo discriminante `tipo_cliente`, vincolato tramite CHECK ai valori `privato` e `azienda`, demandando all'applicazione Django la responsabilità di creare sempre la riga di specializzazione corretta al momento della registrazione di un nuovo cliente. È una scelta pragmatica, dichiarata esplicitamente come semplificazione rispetto al modello concettuale puro.
 
-### 2.4 Vincoli principali
+### 2.5 Vincoli principali
 
 | Tabella | Vincolo |
 |---|---|
@@ -105,7 +217,7 @@ Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dic
 | dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
 | manutenzione | `id_auto` FK NOT NULL |
 
-### 2.5 Script di creazione delle tabelle
+### 2.6 Script di creazione delle tabelle
 
 ```sql
 CREATE DATABASE concessionaria_auto;
@@ -258,7 +370,7 @@ La pagina `/manutenzioni/` presenta un menu a tendina con tutte le auto del parc
 
 ### 3.4 Scelte implementative notevoli
 
-- **Generalizzazione nel codice**: la view di registrazione crea sempre sia il record `Cliente` sia il record `Privato`/`Azienda` nella stessa transazione, garantendo il vincolo di totalità descritto nella sezione 2.3.
+- **Generalizzazione nel codice**: la view di registrazione crea sempre sia il record `Cliente` sia il record `Privato`/`Azienda` nella stessa transazione, garantendo il vincolo di totalità descritto nella sezione 2.4.
 - **Protezione CSRF**: tutti i form POST usano `{% csrf_token %}`. Il logout è implementato come form POST (non link GET) per rispettare la protezione CSRF e il requisito di Django 6.
 - **ORM e query efficienti**: le view usano `select_related` e `prefetch_related` per evitare il problema N+1 nelle pagine che attraversano relazioni (es. storico vendite con dettagli e auto).
 - **Validazione**: i form verificano unicità di email, codice fiscale e partita IVA prima del salvataggio, restituendo errori inline nel form.
