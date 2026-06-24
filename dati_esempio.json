@@ -1,10 +1,10 @@
-﻿[
+[
 {
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1200000$t9UsdWBkosEeZCx9HhRugw$ClMegPkjTHP3+ZmGxpycnUbFGo+MPh0+zfgG4jMDt68=",
-    "last_login": "2026-06-17T15:00:29.311Z",
+    "last_login": "2026-06-19T16:37:07.237Z",
     "is_superuser": false,
     "username": "mario_rossi",
     "first_name": "",
@@ -94,7 +94,7 @@
   "pk": 6,
   "fields": {
     "password": "pbkdf2_sha256$1200000$Zl848MKkSIflcv5uqWjZSb$XvJ6XP7VZp59R6dWscrMIfmCm9jbAvMbW2YAoT9oq3E=",
-    "last_login": null,
+    "last_login": "2026-06-19T16:37:20.388Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -105,14 +105,6 @@
     "date_joined": "2026-06-17T11:25:56.680Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "vbcnjmjvypdncyl0r691j2om3robd09i",
-  "fields": {
-    "session_data": ".eJxVjDEOgzAMAP_iuYqCQ0hg7N43RDG2C21FJAJT1b9XSAztene6N6S8b1Paq6xpZhiggcsvozw-ZTkEP_JyL2Ysy7bOZI7EnLaaW2F5Xc_2bzDlOsEALTEhkaoN2ndRQ9SYQ8eB2KFzwixWbGyUvOsDIjJh9GJbRvKeFT5fCzQ4nA:1wZrkj:2WBnUqx7ny8l1x73dkRg_CXkPEXu0UBH6D_YqrpEUE0",
-    "expire_date": "2026-07-01T15:00:29.323Z"
   }
 },
 {
