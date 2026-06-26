@@ -17,7 +17,7 @@ Thumbs.db
 *.env
 .env
 
-# File temporanei Claude Code
+# File temporanei di sviluppo locale
 crea_admin.py
 .claude/
 
