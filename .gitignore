@@ -19,7 +19,7 @@ Thumbs.db
 
 # File temporanei di sviluppo locale
 crea_admin.py
-.claude/
+.ide/
 
 # Coverage e test
 .coverage
