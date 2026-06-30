@@ -73,9 +73,9 @@ La specializzazione è **totale**, poiché ogni cliente registrato nel sistema d
 
 ### 1.5 Diagramma E-R
 
-![Diagramma E-R completo della concessionaria auto](immagini/er_completo.png)
+![Diagramma E-R completo della concessionaria auto](immagini/er_completo.svg)
 
-*Nota: la notazione a "zampa di gallina" utilizzata nel diagramma non può esprimere graficamente il vincolo di totalità della specializzazione (mostra Privato e Azienda come opzionali rispetto a Cliente). Il vincolo reale — totalità ed esclusività, descritte nel paragrafo 1.4 — va quindi sempre considerato insieme alla spiegazione testuale, non solo dal diagramma.*
+*Nota: nel diagramma ogni tabella riporta le proprie chiavi primarie (PK), chiavi esterne (FK) e le cardinalità minima e massima di ciascuna relazione. Il vincolo di totalità ed esclusività della specializzazione Cliente → Privato/Azienda — descritto nel paragrafo 1.4 — è indicato con frecce tratteggiate verdi e con la nota "PK = FK (OneToOne)": ogni cliente deve avere esattamente una riga corrispondente in Privato oppure in Azienda.*
 
 ---
 
