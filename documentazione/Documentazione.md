@@ -4,7 +4,6 @@
 
 *Nome studente: Antonio Esposito*  
 *Corso: Ingegneria e Scienze Informatiche per la Cybersecurity — Università degli Studi di Napoli Parthenope*  
-*Data: 30/06/2026*
 
 ---
 
