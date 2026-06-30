@@ -53,19 +53,13 @@
   <text x="620" y="218" fill="#27ae60" font-size="10">(0,1)</text>
   <text x="686" y="368" fill="#27ae60" font-size="10">(1,1)</text>
 
-  <!-- VENDITA ──contiene──> DETTAGLIO_VENDITA  (1,N)→(1,1) -->
-  <line x1="940" y1="445" x2="745" y2="580" stroke="#555" stroke-width="1.5"/>
-  <text x="935" y="458" fill="#555" font-size="10">(1,N)</text>
-  <text x="756" y="558" fill="#555" font-size="10">(1,1)</text>
-  <rect x="843" y="493" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="870" y="505" text-anchor="middle" fill="#333" font-size="10" font-style="italic">contiene</text>
+  <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
+  <line x1="875" y1="425" x2="730" y2="615" stroke="#555" stroke-width="1.5"/>
+  <text x="862" y="438" fill="#555" font-size="10">(1,N)</text>
 
-  <!-- AUTO ──inclusa in──> DETTAGLIO_VENDITA  (0,N)→(1,1) -->
-  <line x1="360" y1="310" x2="570" y2="610" stroke="#555" stroke-width="1.5"/>
-  <text x="366" y="340" fill="#555" font-size="10">(0,N)</text>
-  <text x="543" y="614" fill="#555" font-size="10">(1,1)</text>
-  <rect x="430" y="433" width="60" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="460" y="445" text-anchor="middle" fill="#333" font-size="10" font-style="italic">inclusa in</text>
+  <!-- AUTO ─── DETTAGLIO_VENDITA (N:M)  (0,N) -->
+  <line x1="360" y1="320" x2="594" y2="615" stroke="#555" stroke-width="1.5"/>
+  <text x="368" y="348" fill="#555" font-size="10">(0,N)</text>
 
   <!-- ══════════════════════════════════════════
        TABELLE
@@ -177,20 +171,16 @@
   <text x="889" y="376" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="376" fill="#e74c3c" font-size="11">id_cliente</text>
   <text x="889" y="392" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="392" fill="#e74c3c" font-size="11">id_dipendente</text>
 
-  <!-- DETTAGLIO_VENDITA -->
-  <rect x="570" y="570" width="185" height="115" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="570" y="570" width="185" height="22" rx="5" fill="#343a40"/>
-  <rect x="570" y="586" width="185" height="6" fill="#343a40"/>
-  <text x="662" y="585" text-anchor="middle" fill="white" font-weight="bold" font-size="12">DETTAGLIO_VENDITA</text>
-  <text x="584" y="606" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
-  <text x="602" y="606" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
-  <text x="628" y="606" fill="#e74c3c" font-size="11">id_vendita</text>
-  <text x="584" y="622" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
-  <text x="602" y="622" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
-  <text x="628" y="622" fill="#e74c3c" font-size="11">id_auto</text>
-  <text x="584" y="638" fill="#555" font-size="11">   quantita</text>
-  <text x="584" y="654" fill="#555" font-size="11">   prezzo_unitario</text>
-  <text x="584" y="670" fill="#aaa" font-size="10" font-style="italic">PK composta: (id_vendita, id_auto)</text>
+  <!-- DETTAGLIO_VENDITA — relazione N:M (rombo) -->
+  <polygon points="662,585 730,615 662,645 594,615" fill="#f5f5f5" stroke="#555" stroke-width="1.5"/>
+  <text x="662" y="619" text-anchor="middle" fill="#333" font-size="10" font-weight="bold">DETTAGLIO_VENDITA</text>
+  <!-- attributi come ovali -->
+  <line x1="608" y1="638" x2="575" y2="668" stroke="#888" stroke-width="1"/>
+  <ellipse cx="555" cy="681" rx="38" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
+  <text x="555" y="685" text-anchor="middle" fill="#333" font-size="10">quantità</text>
+  <line x1="716" y1="638" x2="750" y2="668" stroke="#888" stroke-width="1"/>
+  <ellipse cx="785" cy="681" rx="52" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
+  <text x="785" y="685" text-anchor="middle" fill="#333" font-size="10">prezzo_unitario</text>
 
   <!-- ══════ LEGENDA ══════ -->
   <rect x="30" y="700" width="480" height="90" rx="5" fill="#f8f9fa" stroke="#aaa" stroke-width="1"/>
@@ -205,8 +195,8 @@
   <!-- ══════ NOTE CARDINALITÀ ══════ -->
   <rect x="530" y="700" width="740" height="90" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="1"/>
   <text x="900" y="718" text-anchor="middle" fill="#1b5e20" font-size="11" font-weight="bold">Cardinalità delle relazioni</text>
-  <text x="546" y="734" fill="#2e7d32" font-size="11">MARCA(1,N) produce AUTO(N,1) — una marca ha almeno 1 auto; ogni auto ha esattamente 1 marca</text>
-  <text x="546" y="750" fill="#2e7d32" font-size="11">FORNITORE(1,N) fornisce AUTO(N,1) — ogni auto ha esattamente 1 fornitore</text>
-  <text x="546" y="766" fill="#2e7d32" font-size="11">AUTO(1,N) richiede MANUTENZIONE(N,1) — un'auto può avere 0 o più manutenzioni</text>
-  <text x="546" y="782" fill="#2e7d32" font-size="11">CLIENTE(1,N) effettua VENDITA(N,1) — DIPENDENTE(1,N) gestisce VENDITA(N,1)</text>
+  <text x="546" y="734" fill="#2e7d32" font-size="11">MARCA(0,N) produce AUTO(1,1) — una marca può avere 0+ auto; ogni auto ha esattamente 1 marca</text>
+  <text x="546" y="750" fill="#2e7d32" font-size="11">FORNITORE(0,N) fornisce AUTO(1,1) — ogni auto ha esattamente 1 fornitore</text>
+  <text x="546" y="766" fill="#2e7d32" font-size="11">AUTO(0,N) richiede MANUTENZIONE(1,1) — CLIENTE(0,N) effettua VENDITA(1,1) — DIPENDENTE(0,N) gestisce VENDITA(1,1)</text>
+  <text x="546" y="782" fill="#2e7d32" font-size="11">AUTO(0,N) — DETTAGLIO_VENDITA (N:M) — VENDITA(1,N): ogni vendita ha almeno 1 auto; ogni auto può essere in 0+ vendite</text>
 </svg>

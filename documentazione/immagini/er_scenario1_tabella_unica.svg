@@ -41,19 +41,13 @@
   <rect x="890" y="228" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
   <text x="917" y="240" text-anchor="middle" fill="#333" font-size="10" font-style="italic">gestisce</text>
 
-  <!-- VENDITA ──contiene──> DETTAGLIO_VENDITA  (1,N)→(1,1) -->
-  <line x1="910" y1="430" x2="740" y2="565" stroke="#555" stroke-width="1.5"/>
-  <text x="905" y="443" fill="#555" font-size="10">(1,N)</text>
-  <text x="740" y="558" fill="#555" font-size="10">(1,1)</text>
-  <rect x="820" y="480" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="847" y="492" text-anchor="middle" fill="#333" font-size="10" font-style="italic">contiene</text>
+  <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
+  <line x1="855" y1="415" x2="718" y2="600" stroke="#555" stroke-width="1.5"/>
+  <text x="848" y="430" fill="#555" font-size="10">(1,N)</text>
 
-  <!-- AUTO ──inclusa in──> DETTAGLIO_VENDITA  (0,N)→(1,1) -->
-  <line x1="360" y1="290" x2="560" y2="580" stroke="#555" stroke-width="1.5"/>
-  <text x="376" y="337" fill="#555" font-size="10">(0,N)</text>
-  <text x="532" y="582" fill="#555" font-size="10">(1,1)</text>
-  <rect x="418" y="410" width="60" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="448" y="422" text-anchor="middle" fill="#333" font-size="10" font-style="italic">inclusa in</text>
+  <!-- AUTO ─── DETTAGLIO_VENDITA (N:M)  (0,N) -->
+  <line x1="355" y1="290" x2="580" y2="600" stroke="#555" stroke-width="1.5"/>
+  <text x="363" y="318" fill="#555" font-size="10">(0,N)</text>
 
   <!-- ══════════════════════════════════════════
        TABELLE
@@ -150,20 +144,16 @@
   <line x1="231" y1="570" x2="374" y2="570" stroke="#ddd" stroke-width="1"/>
   <text x="239" y="585" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="257" y="585" fill="#e74c3c" font-size="11">id_auto</text>
 
-  <!-- DETTAGLIO_VENDITA -->
-  <rect x="560" y="565" width="185" height="115" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="560" y="565" width="185" height="22" rx="5" fill="#343a40"/>
-  <rect x="560" y="581" width="185" height="6" fill="#343a40"/>
-  <text x="652" y="580" text-anchor="middle" fill="white" font-weight="bold" font-size="12">DETTAGLIO_VENDITA</text>
-  <text x="574" y="600" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
-  <text x="592" y="600" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
-  <text x="618" y="600" fill="#e74c3c" font-size="11">id_vendita</text>
-  <text x="574" y="616" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
-  <text x="592" y="616" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
-  <text x="618" y="616" fill="#e74c3c" font-size="11">id_auto</text>
-  <text x="574" y="632" fill="#555" font-size="11">   quantita</text>
-  <text x="574" y="648" fill="#555" font-size="11">   prezzo_unitario</text>
-  <text x="574" y="664" fill="#aaa" font-size="10" font-style="italic">PK composta: (id_vendita, id_auto)</text>
+  <!-- DETTAGLIO_VENDITA — relazione N:M (rombo) -->
+  <polygon points="650,572 718,602 650,632 582,602" fill="#f5f5f5" stroke="#555" stroke-width="1.5"/>
+  <text x="650" y="606" text-anchor="middle" fill="#333" font-size="10" font-weight="bold">DETTAGLIO_VENDITA</text>
+  <!-- attributi come ovali -->
+  <line x1="596" y1="624" x2="562" y2="655" stroke="#888" stroke-width="1"/>
+  <ellipse cx="542" cy="668" rx="38" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
+  <text x="542" y="672" text-anchor="middle" fill="#333" font-size="10">quantità</text>
+  <line x1="704" y1="624" x2="738" y2="655" stroke="#888" stroke-width="1"/>
+  <ellipse cx="772" cy="668" rx="52" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
+  <text x="772" y="672" text-anchor="middle" fill="#333" font-size="10">prezzo_unitario</text>
 
   <!-- ══════ PROBLEMA ══════ -->
   <rect x="30" y="690" width="1140" height="68" rx="5" fill="#fdecea" stroke="#e74c3c" stroke-width="1.5"/>
