@@ -6,52 +6,47 @@
        LINEE / RELAZIONI  (disegnate PRIMA dei box)
        ══════════════════════════════════════════ -->
 
-  <!-- MARCA ──produce──> AUTO  (0,N)→(1,1) -->
-  <line x1="160" y1="137" x2="235" y2="230" stroke="#555" stroke-width="1.5"/>
+  <!-- ── produce: MARCA → rombo → AUTO ── -->
+  <line x1="160" y1="137" x2="168" y2="192" stroke="#555" stroke-width="1.5"/>
   <text x="163" y="128" fill="#555" font-size="10">(0,N)</text>
-  <text x="200" y="215" fill="#555" font-size="10">(1,1)</text>
-  <rect x="165" y="155" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="191" y="167" text-anchor="middle" fill="#333" font-size="10" font-style="italic">produce</text>
+  <line x1="232" y1="192" x2="235" y2="230" stroke="#555" stroke-width="1.5"/>
+  <text x="237" y="228" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- FORNITORE ──fornisce──> AUTO  (0,N)→(1,1) -->
-  <line x1="160" y1="342" x2="235" y2="285" stroke="#555" stroke-width="1.5"/>
-  <text x="163" y="354" fill="#555" font-size="10">(0,N)</text>
-  <text x="198" y="271" fill="#555" font-size="10">(1,1)</text>
-  <rect x="165" y="298" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="191" y="310" text-anchor="middle" fill="#333" font-size="10" font-style="italic">fornisce</text>
+  <!-- ── fornisce: FORNITORE → rombo → AUTO ── -->
+  <line x1="160" y1="342" x2="168" y2="295" stroke="#555" stroke-width="1.5"/>
+  <text x="163" y="348" fill="#555" font-size="10">(0,N)</text>
+  <line x1="232" y1="295" x2="235" y2="268" stroke="#555" stroke-width="1.5"/>
+  <text x="237" y="265" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- AUTO ──richiede──> MANUTENZIONE  (0,N)→(1,1) -->
-  <line x1="310" y1="335" x2="305" y2="490" stroke="#555" stroke-width="1.5"/>
-  <text x="315" y="355" fill="#555" font-size="10">(0,N)</text>
-  <text x="315" y="480" fill="#555" font-size="10">(1,1)</text>
-  <rect x="275" y="398" width="56" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="303" y="410" text-anchor="middle" fill="#333" font-size="10" font-style="italic">richiede</text>
+  <!-- ── richiede: AUTO → rombo → MANUTENZIONE ── -->
+  <line x1="310" y1="335" x2="308" y2="398" stroke="#555" stroke-width="1.5"/>
+  <text x="317" y="338" fill="#555" font-size="10">(0,N)</text>
+  <line x1="308" y1="426" x2="307" y2="490" stroke="#555" stroke-width="1.5"/>
+  <text x="313" y="487" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- CLIENTE ──effettua──> VENDITA  (0,N)→(1,1) -->
-  <line x1="650" y1="145" x2="875" y2="360" stroke="#555" stroke-width="1.5"/>
-  <text x="655" y="138" fill="#555" font-size="10">(0,N)</text>
-  <text x="830" y="365" fill="#555" font-size="10">(1,1)</text>
-  <rect x="730" y="228" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="756" y="240" text-anchor="middle" fill="#333" font-size="10" font-style="italic">effettua</text>
+  <!-- ── effettua: CLIENTE → rombo → VENDITA ── -->
+  <line x1="650" y1="145" x2="723" y2="248" stroke="#555" stroke-width="1.5"/>
+  <text x="653" y="140" fill="#555" font-size="10">(0,N)</text>
+  <line x1="787" y1="248" x2="875" y2="340" stroke="#555" stroke-width="1.5"/>
+  <text x="849" y="295" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- DIPENDENTE ──gestisce──> VENDITA  (0,N)→(1,1) -->
-  <line x1="950" y1="200" x2="957" y2="285" stroke="#555" stroke-width="1.5"/>
-  <text x="960" y="220" fill="#555" font-size="10">(0,N)</text>
-  <text x="960" y="278" fill="#555" font-size="10">(1,1)</text>
-  <rect x="910" y="235" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="937" y="247" text-anchor="middle" fill="#333" font-size="10" font-style="italic">gestisce</text>
+  <!-- ── gestisce: DIPENDENTE → rombo → VENDITA ── -->
+  <line x1="952" y1="200" x2="954" y2="228" stroke="#555" stroke-width="1.5"/>
+  <text x="960" y="205" fill="#555" font-size="10">(0,N)</text>
+  <line x1="954" y1="256" x2="957" y2="285" stroke="#555" stroke-width="1.5"/>
+  <text x="960" y="280" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- CLIENTE ──specializza──> PRIVATO  (0,1)→(1,1) dashed -->
-  <line x1="530" y1="210" x2="455" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="490" y="278" fill="#27ae60" font-size="10" font-style="italic">specializza</text>
-  <text x="512" y="218" fill="#27ae60" font-size="10">(0,1)</text>
-  <text x="430" y="374" fill="#27ae60" font-size="10">(1,1)</text>
+  <!-- ── è un: CLIENTE → rombo → PRIVATO (dashed green) ── -->
+  <line x1="530" y1="210" x2="490" y2="281" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="533" y="213" fill="#27ae60" font-size="10">(0,1)</text>
+  <line x1="490" y1="309" x2="445" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="428" y="378" fill="#27ae60" font-size="10">(1,1)</text>
 
-  <!-- CLIENTE ──specializza──> AZIENDA  (0,1)→(1,1) dashed -->
-  <line x1="620" y1="210" x2="672" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="625" y="278" fill="#27ae60" font-size="10" font-style="italic">specializza</text>
-  <text x="620" y="218" fill="#27ae60" font-size="10">(0,1)</text>
-  <text x="686" y="368" fill="#27ae60" font-size="10">(1,1)</text>
+  <!-- ── è un: CLIENTE → rombo → AZIENDA (dashed green) ── -->
+  <line x1="620" y1="210" x2="637" y2="281" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="623" y="213" fill="#27ae60" font-size="10">(0,1)</text>
+  <line x1="637" y1="309" x2="677" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="680" y="378" fill="#27ae60" font-size="10">(1,1)</text>
 
   <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
   <line x1="875" y1="425" x2="730" y2="615" stroke="#555" stroke-width="1.5"/>
@@ -170,6 +165,38 @@
   <line x1="881" y1="360" x2="1034" y2="360" stroke="#ddd" stroke-width="1"/>
   <text x="889" y="376" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="376" fill="#e74c3c" font-size="11">id_cliente</text>
   <text x="889" y="392" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="392" fill="#e74c3c" font-size="11">id_dipendente</text>
+
+  <!-- ══════════════════════════════════════════
+       ROMBI RELAZIONI
+       ══════════════════════════════════════════ -->
+
+  <!-- produce (MARCA – AUTO) -->
+  <polygon points="200,178 232,192 200,206 168,192" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="200" y="196" text-anchor="middle" fill="#333" font-size="9" font-style="italic">produce</text>
+
+  <!-- fornisce (FORNITORE – AUTO) -->
+  <polygon points="200,281 232,295 200,309 168,295" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="200" y="299" text-anchor="middle" fill="#333" font-size="9" font-style="italic">fornisce</text>
+
+  <!-- richiede (AUTO – MANUTENZIONE) -->
+  <polygon points="308,398 343,412 308,426 273,412" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="308" y="416" text-anchor="middle" fill="#333" font-size="9" font-style="italic">richiede</text>
+
+  <!-- effettua (CLIENTE – VENDITA) -->
+  <polygon points="755,234 787,248 755,262 723,248" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="755" y="252" text-anchor="middle" fill="#333" font-size="9" font-style="italic">effettua</text>
+
+  <!-- gestisce (DIPENDENTE – VENDITA) -->
+  <polygon points="954,228 986,242 954,256 922,242" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="954" y="246" text-anchor="middle" fill="#333" font-size="9" font-style="italic">gestisce</text>
+
+  <!-- è un (CLIENTE – PRIVATO, ISA) -->
+  <polygon points="490,281 522,295 490,309 458,295" fill="#e8f5e9" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="490" y="299" text-anchor="middle" fill="#27ae60" font-size="9" font-style="italic">è un</text>
+
+  <!-- è un (CLIENTE – AZIENDA, ISA) -->
+  <polygon points="637,281 669,295 637,309 605,295" fill="#e8f5e9" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="637" y="299" text-anchor="middle" fill="#27ae60" font-size="9" font-style="italic">è un</text>
 
   <!-- DETTAGLIO_VENDITA — relazione N:M (rombo) -->
   <polygon points="662,585 730,615 662,645 594,615" fill="#f5f5f5" stroke="#555" stroke-width="1.5"/>

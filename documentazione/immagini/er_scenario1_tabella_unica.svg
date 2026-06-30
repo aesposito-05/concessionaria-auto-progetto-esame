@@ -6,40 +6,35 @@
        LINEE / RELAZIONI
        ══════════════════════════════════════════ -->
 
-  <!-- MARCA ──produce──> AUTO  (0,N)→(1,1) -->
-  <line x1="160" y1="135" x2="230" y2="220" stroke="#555" stroke-width="1.5"/>
-  <text x="162" y="123" fill="#555" font-size="10">(0,N)</text>
-  <text x="196" y="208" fill="#555" font-size="10">(1,1)</text>
-  <rect x="163" y="155" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="189" y="167" text-anchor="middle" fill="#333" font-size="10" font-style="italic">produce</text>
+  <!-- ── produce: MARCA → rombo → AUTO ── -->
+  <line x1="160" y1="135" x2="168" y2="188" stroke="#555" stroke-width="1.5"/>
+  <text x="163" y="125" fill="#555" font-size="10">(0,N)</text>
+  <line x1="232" y1="188" x2="230" y2="220" stroke="#555" stroke-width="1.5"/>
+  <text x="233" y="218" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- FORNITORE ──fornisce──> AUTO  (0,N)→(1,1) -->
-  <line x1="160" y1="335" x2="230" y2="270" stroke="#555" stroke-width="1.5"/>
-  <text x="162" y="340" fill="#555" font-size="10">(0,N)</text>
-  <text x="196" y="257" fill="#555" font-size="10">(1,1)</text>
-  <rect x="162" y="290" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="188" y="302" text-anchor="middle" fill="#333" font-size="10" font-style="italic">fornisce</text>
+  <!-- ── fornisce: FORNITORE → rombo → AUTO ── -->
+  <line x1="160" y1="335" x2="168" y2="293" stroke="#555" stroke-width="1.5"/>
+  <text x="163" y="342" fill="#555" font-size="10">(0,N)</text>
+  <line x1="232" y1="293" x2="230" y2="268" stroke="#555" stroke-width="1.5"/>
+  <text x="233" y="265" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- AUTO ──richiede──> MANUTENZIONE  (0,N)→(1,1) -->
-  <line x1="305" y1="330" x2="300" y2="480" stroke="#555" stroke-width="1.5"/>
-  <text x="310" y="348" fill="#555" font-size="10">(0,N)</text>
-  <text x="310" y="472" fill="#555" font-size="10">(1,1)</text>
-  <rect x="268" y="390" width="56" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="296" y="402" text-anchor="middle" fill="#333" font-size="10" font-style="italic">richiede</text>
+  <!-- ── richiede: AUTO → rombo → MANUTENZIONE ── -->
+  <line x1="305" y1="330" x2="303" y2="391" stroke="#555" stroke-width="1.5"/>
+  <text x="310" y="345" fill="#555" font-size="10">(0,N)</text>
+  <line x1="303" y1="419" x2="300" y2="480" stroke="#555" stroke-width="1.5"/>
+  <text x="307" y="476" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- CLIENTE ──effettua──> VENDITA  (0,N)→(1,1) -->
-  <line x1="645" y1="160" x2="850" y2="330" stroke="#555" stroke-width="1.5"/>
-  <text x="647" y="147" fill="#555" font-size="10">(0,N)</text>
-  <text x="820" y="335" fill="#555" font-size="10">(1,1)</text>
-  <rect x="718" y="225" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="744" y="237" text-anchor="middle" fill="#333" font-size="10" font-style="italic">effettua</text>
+  <!-- ── effettua: CLIENTE → rombo → VENDITA ── -->
+  <line x1="645" y1="240" x2="713" y2="268" stroke="#555" stroke-width="1.5"/>
+  <text x="648" y="233" fill="#555" font-size="10">(0,N)</text>
+  <line x1="777" y1="268" x2="855" y2="320" stroke="#555" stroke-width="1.5"/>
+  <text x="828" y="318" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- DIPENDENTE ──gestisce──> VENDITA  (0,N)→(1,1) -->
-  <line x1="930" y1="195" x2="930" y2="275" stroke="#555" stroke-width="1.5"/>
-  <text x="935" y="215" fill="#555" font-size="10">(0,N)</text>
-  <text x="935" y="268" fill="#555" font-size="10">(1,1)</text>
-  <rect x="890" y="228" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
-  <text x="917" y="240" text-anchor="middle" fill="#333" font-size="10" font-style="italic">gestisce</text>
+  <!-- ── gestisce: DIPENDENTE → rombo → VENDITA ── -->
+  <line x1="930" y1="195" x2="930" y2="221" stroke="#555" stroke-width="1.5"/>
+  <text x="936" y="208" fill="#555" font-size="10">(0,N)</text>
+  <line x1="930" y1="249" x2="930" y2="275" stroke="#555" stroke-width="1.5"/>
+  <text x="936" y="271" fill="#555" font-size="10">(1,1)</text>
 
   <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
   <line x1="855" y1="415" x2="718" y2="600" stroke="#555" stroke-width="1.5"/>
@@ -143,6 +138,30 @@
   <text x="239" y="563" fill="#555" font-size="11">   costo</text>
   <line x1="231" y1="570" x2="374" y2="570" stroke="#ddd" stroke-width="1"/>
   <text x="239" y="585" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="257" y="585" fill="#e74c3c" font-size="11">id_auto</text>
+
+  <!-- ══════════════════════════════════════════
+       ROMBI RELAZIONI
+       ══════════════════════════════════════════ -->
+
+  <!-- produce (MARCA – AUTO) -->
+  <polygon points="200,174 232,188 200,202 168,188" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="200" y="192" text-anchor="middle" fill="#333" font-size="9" font-style="italic">produce</text>
+
+  <!-- fornisce (FORNITORE – AUTO) -->
+  <polygon points="200,279 232,293 200,307 168,293" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="200" y="297" text-anchor="middle" fill="#333" font-size="9" font-style="italic">fornisce</text>
+
+  <!-- richiede (AUTO – MANUTENZIONE) -->
+  <polygon points="303,391 338,405 303,419 268,405" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="303" y="409" text-anchor="middle" fill="#333" font-size="9" font-style="italic">richiede</text>
+
+  <!-- effettua (CLIENTE – VENDITA) -->
+  <polygon points="745,254 777,268 745,282 713,268" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="745" y="272" text-anchor="middle" fill="#333" font-size="9" font-style="italic">effettua</text>
+
+  <!-- gestisce (DIPENDENTE – VENDITA) -->
+  <polygon points="930,221 962,235 930,249 898,235" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
+  <text x="930" y="239" text-anchor="middle" fill="#333" font-size="9" font-style="italic">gestisce</text>
 
   <!-- DETTAGLIO_VENDITA — relazione N:M (rombo) -->
   <polygon points="650,572 718,602 650,632 582,602" fill="#f5f5f5" stroke="#555" stroke-width="1.5"/>
