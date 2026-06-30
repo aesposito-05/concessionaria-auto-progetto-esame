@@ -9,14 +9,14 @@
   <!-- MARCA ──produce──> AUTO  (1,N)→(N,1) -->
   <line x1="160" y1="137" x2="235" y2="230" stroke="#555" stroke-width="1.5"/>
   <text x="163" y="128" fill="#555" font-size="10">(1,N)</text>
-  <text x="230" y="222" fill="#555" font-size="10">(N,1)</text>
+  <text x="200" y="215" fill="#555" font-size="10">(N,1)</text>
   <rect x="165" y="155" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
   <text x="191" y="167" text-anchor="middle" fill="#333" font-size="10" font-style="italic">produce</text>
 
   <!-- FORNITORE ──fornisce──> AUTO  (1,N)→(N,1) -->
   <line x1="160" y1="342" x2="235" y2="285" stroke="#555" stroke-width="1.5"/>
   <text x="163" y="354" fill="#555" font-size="10">(1,N)</text>
-  <text x="228" y="278" fill="#555" font-size="10">(N,1)</text>
+  <text x="198" y="271" fill="#555" font-size="10">(N,1)</text>
   <rect x="165" y="298" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
   <text x="191" y="310" text-anchor="middle" fill="#333" font-size="10" font-style="italic">fornisce</text>
 
@@ -51,7 +51,7 @@
   <line x1="620" y1="210" x2="672" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
   <text x="625" y="278" fill="#27ae60" font-size="10" font-style="italic">specializza</text>
   <text x="620" y="218" fill="#27ae60" font-size="10">(1,1)</text>
-  <text x="674" y="374" fill="#27ae60" font-size="10">(1,1)</text>
+  <text x="686" y="368" fill="#27ae60" font-size="10">(1,1)</text>
 
   <!-- VENDITA ──contiene──> DETTAGLIO_VENDITA  (1,N)→(N,1) -->
   <line x1="940" y1="445" x2="745" y2="580" stroke="#555" stroke-width="1.5"/>
