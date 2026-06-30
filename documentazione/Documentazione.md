@@ -22,7 +22,7 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
 2. Progettazione logica
 3. Implementazione del sistema informativo
 4. Istruzioni per installazione e avvio
-5. Bonus (sicurezza)
+5. Bonus
 
 ---
 
@@ -462,30 +462,6 @@ Dopo `loaddata dati_esempio.json` sono disponibili questi account:
 
 ---
 
-## 5. Bonus — Simulazione di attacco: SQL injection
+## 5. Bonus
 
-### Cos'è una SQL injection
-
-È un attacco che funziona quando un'applicazione "mescola" l'input dell'utente direttamente dentro un comando SQL, senza tenerlo separato dal comando stesso. Se l'input non viene trattato come semplice testo, un utente malintenzionato può scrivere in un campo di un modulo (per esempio l'email) un pezzo di codice SQL al posto di un valore normale, e quel codice viene eseguito davvero — alterando il comportamento della query, per esempio facendo entrare qualcuno senza conoscere la password corretta.
-
-### Come Django previene questo attacco
-
-Django non costruisce mai le query concatenando il testo dell'utente dentro il comando SQL. Quando si scrive, per esempio, `Cliente.objects.filter(email=email)`, Django invia al database la query e il valore separatamente: il database sa sempre che quel valore è solo testo da confrontare, non un pezzo di comando — quindi qualsiasi cosa scriva l'utente, anche se sembra codice SQL, viene trattata sempre come semplice testo, mai eseguita come comando. È per questo che il progetto, usando esclusivamente l'ORM di Django per ogni accesso al database, non è vulnerabile a questo tipo di attacco.
-
-### Esempio
-
-Immagina un modulo di login che chiede l'email.
-
-In un'implementazione vulnerabile, non scritta con Django, la query potrebbe essere costruita così:
-```python
-query = "SELECT * FROM cliente WHERE email = '" + email + "'"
-```
-Se un utente scrive come email `' OR '1'='1`, la condizione diventa sempre vera, e la query potrebbe restituire un cliente senza che l'attaccante conosca nessuna password.
-
-Django, invece, scrive sempre la query in questo modo (semplificato):
-```python
-query = "SELECT * FROM cliente WHERE email = ?"
-```
-con il valore digitato dall'utente passato separatamente, come semplice parametro. Lo stesso input (`' OR '1'='1`) non inganna nulla: il database cerca un cliente con un'email letteralmente uguale a quel testo strano, non lo trova, e l'accesso viene correttamente negato.
-
-*La protezione è automatica per ogni query scritta tramite l'ORM di Django: non richiede nessun intervento aggiuntivo da parte dello sviluppatore.*
+*Non realizzato.*
