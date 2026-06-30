@@ -63,14 +63,14 @@ L'entità **Manutenzione** rappresenta un intervento effettuato su un'auto, con 
 
 ### 1.3 Relazioni
 
-| Relazione | Cardinalità | Descrizione |
-|---|---|---|
-| Cliente effettua Vendita | 1:N | Un cliente può effettuare più vendite; ogni vendita appartiene a un solo cliente |
-| Dipendente gestisce Vendita | 1:N | Un dipendente può gestire più vendite; ogni vendita è gestita da un solo dipendente |
-| Auto appartiene a Marca | N:1 | Più auto possono appartenere alla stessa marca; ogni auto ha una sola marca |
-| Auto è fornita da Fornitore | N:1 | Più auto possono provenire dallo stesso fornitore; ogni auto ha un solo fornitore |
-| Auto è soggetta a Manutenzione | 1:N | Un'auto può avere più interventi di manutenzione nel tempo |
-| Vendita include Auto | N:M | Una vendita può comprendere più auto e un'auto può comparire in più vendite; relazione risolta tramite Dettaglio_Vendita |
+| Relazione | Entità A | (min,max) A | (min,max) B | Entità B | Descrizione |
+|---|---|---|---|---|---|
+| produce | MARCA | (0,N) | (1,1) | AUTO | Una marca può produrre zero o più auto; ogni auto è prodotta da esattamente una marca |
+| fornisce | FORNITORE | (0,N) | (1,1) | AUTO | Un fornitore può fornire zero o più auto; ogni auto proviene da esattamente un fornitore |
+| richiede | AUTO | (0,N) | (1,1) | MANUTENZIONE | Un'auto può avere zero o più interventi di manutenzione; ogni manutenzione riguarda esattamente un'auto |
+| effettua | CLIENTE | (0,N) | (1,1) | VENDITA | Un cliente può effettuare zero o più vendite; ogni vendita è effettuata da esattamente un cliente |
+| gestisce | DIPENDENTE | (0,N) | (1,1) | VENDITA | Un dipendente può gestire zero o più vendite; ogni vendita è gestita da esattamente un dipendente |
+| DETTAGLIO_VENDITA | AUTO | (0,N) | (1,N) | VENDITA | Un'auto può comparire in zero o più vendite; ogni vendita contiene almeno un'auto (relazione N:M con attributi: quantità, prezzo_unitario) |
 
 ### 1.4 Generalizzazione e specializzazione
 
