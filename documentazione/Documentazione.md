@@ -23,8 +23,8 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
    - 1.2 Entità e attributi
    - 1.3 Relazioni
    - 1.4 Generalizzazione e specializzazione
-   - 1.5 I due scenari alternativi per la generalizzazione
-   - 1.6 Diagramma E-R
+   - 1.5 Scenari alternativi scartati e loro problemi
+   - 1.6 Soluzione adottata — Diagramma E-R con tre tabelle
    - 1.7 Derivazione della generalizzazione
    - 1.8 Semplificazioni e adattamenti
    - 1.9 Vincoli principali
@@ -83,27 +83,45 @@ Dall'alto (approccio top-down): partendo dall'entità Cliente, si riconosce la n
 
 La specializzazione è **totale**, poiché ogni cliente registrato nel sistema deve obbligatoriamente essere o un privato o un'azienda — non esistono clienti "generici" privi di una delle due caratterizzazioni. È inoltre **esclusiva**, poiché un singolo cliente non può appartenere a entrambe le categorie contemporaneamente. Totalità ed esclusività, insieme, definiscono una **partizione completa** dell'entità Cliente nelle due sottoclassi Privato e Azienda.
 
-### 1.5 I due scenari alternativi per la generalizzazione
+### 1.5 Scenari alternativi scartati e loro problemi
 
-Prima di descrivere la soluzione adottata, si analizzano i due scenari alternativi con i rispettivi problemi.
+Per tradurre a livello logico la generalizzazione Cliente → Privato/Azienda esistono tre approcci principali. I primi due sono stati analizzati e scartati perché introducono problemi strutturali; il terzo — descritto nel paragrafo 1.6 — è quello adottato nel progetto.
 
-**Scenario 1 — Tabella unica con tutti gli attributi**
+**Scenario 1 — Tabella unica con tutti gli attributi (scartato)**
 
-Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Privato che di Azienda. Ogni riga ha sempre metà dei campi vuoti (NULL): un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL. Lo schema risulta denormalizzato e spreca spazio.
+Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Privato che di Azienda. Questo approccio presenta due problemi gravi:
 
-![Diagramma E-R Scenario 1 - tabella unica](immagini/er_scenario1_tabella_unica.svg)
+- *Valori NULL strutturali:* ogni riga ha sempre metà dei campi vuoti. Un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL. Lo schema è denormalizzato e spreca spazio.
+- *Impossibilità di imporre NOT NULL:* non è possibile rendere obbligatori i campi specifici di ciascun sottotipo perché la stessa colonna deve accettare NULL per l'altro sottotipo.
 
-**Scenario 2 — Solo le due tabelle figlie, senza tabella padre**
+Per questi motivi lo **Scenario 1 è stato scartato**.
 
-Si eliminano gli attributi comuni e si creano solo `privato` e `azienda`, ognuna con tutti i propri attributi. Gli attributi comuni (`email`, `telefono`, `citta`) vengono duplicati in entrambe le tabelle. Non esiste un unico posto dove cercare un cliente: se si vuole trovare un cliente per email bisogna cercare in entrambe le tabelle. Inoltre la tabella Vendita dovrebbe avere due chiavi esterne separate, una verso `privato` e una verso `azienda`.
+![Diagramma E-R Scenario 1 - tabella unica (scartato)](immagini/er_scenario1_tabella_unica.svg)
 
-![Diagramma E-R Scenario 2 - due tabelle senza padre](immagini/er_scenario2_due_tabelle.svg)
+**Scenario 2 — Solo le due tabelle figlie, senza tabella padre (scartato)**
 
-### 1.6 Diagramma E-R
+Si creano solo `privato` e `azienda`, senza una tabella `cliente` comune. Anche questo approccio presenta problemi gravi:
 
-![Diagramma E-R completo della concessionaria auto](immagini/er_completo.svg)
+- *Attributi duplicati:* `email`, `telefono` e `citta` devono essere ripetuti in entrambe le tabelle, violando il principio di non ridondanza.
+- *Ricerca impossibile su cliente generico:* per trovare un cliente per email occorre interrogare entrambe le tabelle con una UNION, rendendo le query più complesse e fragili.
+- *Doppia chiave esterna in Vendita:* la tabella `vendita` dovrebbe avere due colonne separate — `id_privato` e `id_azienda` — di cui solo una per riga è valorizzata e l'altra è sempre NULL, reintroducendo il problema dei valori NULL strutturali.
 
-*Nota: nel diagramma ogni tabella riporta le proprie chiavi primarie (PK), chiavi esterne (FK) e le cardinalità minima e massima di ciascuna relazione. Il vincolo di totalità ed esclusività della specializzazione Cliente → Privato/Azienda — descritto nel paragrafo 1.4 — è indicato con frecce tratteggiate verdi e con la nota "PK = FK (OneToOne)": ogni cliente deve avere esattamente una riga corrispondente in Privato oppure in Azienda.*
+Per questi motivi lo **Scenario 2 è stato scartato**.
+
+![Diagramma E-R Scenario 2 - due tabelle senza padre (scartato)](immagini/er_scenario2_due_tabelle.svg)
+
+### 1.6 Soluzione adottata — Diagramma E-R con tre tabelle
+
+Entrambi gli scenari alternativi sono stati scartati. La soluzione adottata è la strategia **"tabella per ogni entità"** (o *table per subclass*): si mantengono tre tabelle distinte — `cliente`, `privato` e `azienda` — che risolvono tutti i problemi identificati:
+
+- *Nessun valore NULL strutturale:* `cliente` contiene solo gli attributi comuni (email, telefono, citta); `privato` contiene solo i campi del cliente privato; `azienda` solo quelli aziendali. Ogni colonna può essere dichiarata NOT NULL dove necessario.
+- *Nessuna ridondanza:* gli attributi comuni sono scritti una sola volta nella tabella `cliente`, non duplicati.
+- *Un'unica chiave esterna in Vendita:* `vendita` punta sempre e solo a `cliente` tramite `id_cliente`, indipendentemente dal fatto che il cliente sia privato o aziendale. Non servono due colonne separate.
+- *Specializzazione garantita:* `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Ogni riga di `cliente` corrisponde esattamente a una riga in `privato` oppure in `azienda`.
+
+![Diagramma E-R completo — soluzione adottata](immagini/er_completo.svg)
+
+*Nota: nel diagramma ogni tabella riporta le proprie chiavi primarie (PK), chiavi esterne (FK) e le cardinalità minima e massima di ciascuna relazione. La specializzazione è indicata con frecce tratteggiate verdi e con la nota "PK = FK (OneToOne)": ogni cliente ha esattamente una riga corrispondente in Privato oppure in Azienda.*
 
 ### 1.7 Derivazione della generalizzazione
 
