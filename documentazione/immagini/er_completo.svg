@@ -1,192 +1,212 @@
-<svg viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
-  <rect width="1200" height="780" fill="white"/>
-  <text x="600" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Diagramma E-R completo — Soluzione adottata (tre tabelle: Cliente + Privato + Azienda)</text>
+<svg viewBox="0 0 1300 820" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
+  <rect width="1300" height="820" fill="white"/>
+  <text x="650" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Soluzione adottata — tre tabelle: CLIENTE + PRIVATO + AZIENDA</text>
 
-  <!-- ===== MARCA ===== -->
-  <rect x="20" y="50" width="150" height="115" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="20" y="50" width="150" height="24" rx="6" fill="#343a40"/>
-  <rect x="20" y="68" width="150" height="6" fill="#343a40"/>
-  <text x="95" y="67" text-anchor="middle" fill="white" font-weight="bold">MARCA</text>
-  <text x="95" y="44" text-anchor="middle" fill="#555" font-size="10">(1,N) produce AUTO</text>
-  <text x="36" y="90" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="56" y="90" fill="#1a1a1a" font-size="11">id_marca</text>
-  <text x="36" y="106" fill="#555" font-size="11">   nome</text>
-  <text x="36" y="122" fill="#555" font-size="11">   paese</text>
+  <!-- ══════════════════════════════════════════
+       LINEE / RELAZIONI  (disegnate PRIMA dei box)
+       ══════════════════════════════════════════ -->
 
-  <!-- ===== FORNITORE ===== -->
-  <rect x="20" y="225" width="150" height="115" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="20" y="225" width="150" height="24" rx="6" fill="#343a40"/>
-  <rect x="20" y="243" width="150" height="6" fill="#343a40"/>
-  <text x="95" y="242" text-anchor="middle" fill="white" font-weight="bold">FORNITORE</text>
-  <text x="95" y="219" text-anchor="middle" fill="#555" font-size="10">(1,N) fornisce AUTO</text>
-  <text x="36" y="265" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="56" y="265" fill="#1a1a1a" font-size="11">id_fornitore</text>
-  <text x="36" y="281" fill="#555" font-size="11">   nome</text>
-  <text x="36" y="297" fill="#555" font-size="11">   paese</text>
+  <!-- MARCA ──produce──> AUTO  (1,N)→(N,1) -->
+  <line x1="160" y1="137" x2="235" y2="230" stroke="#555" stroke-width="1.5"/>
+  <text x="163" y="128" fill="#555" font-size="10">(1,N)</text>
+  <text x="230" y="222" fill="#555" font-size="10">(N,1)</text>
+  <rect x="165" y="155" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="191" y="167" text-anchor="middle" fill="#333" font-size="10" font-style="italic">produce</text>
 
-  <!-- ===== AUTO ===== -->
-  <rect x="230" y="120" width="165" height="195" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="230" y="120" width="165" height="24" rx="6" fill="#343a40"/>
-  <rect x="230" y="138" width="165" height="6" fill="#343a40"/>
-  <text x="312" y="137" text-anchor="middle" fill="white" font-weight="bold">AUTO</text>
-  <text x="312" y="114" text-anchor="middle" fill="#555" font-size="10">(0,N) Manutenzione  (0,N) DetVendita</text>
-  <text x="246" y="160" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="266" y="160" fill="#1a1a1a" font-size="11">id_auto</text>
-  <text x="246" y="176" fill="#555" font-size="11">   modello</text>
-  <text x="246" y="192" fill="#555" font-size="11">   prezzo</text>
-  <text x="246" y="208" fill="#555" font-size="11">   anno</text>
-  <text x="246" y="224" fill="#555" font-size="11">   stato</text>
-  <text x="246" y="244" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="266" y="244" fill="#c0392b" font-size="11">id_marca → MARCA</text>
-  <text x="246" y="260" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="266" y="260" fill="#c0392b" font-size="11">id_fornitore → FORNITORE</text>
-  <text x="246" y="278" fill="#555" font-size="10" font-style="italic">(N,1) per Marca e Fornitore</text>
+  <!-- FORNITORE ──fornisce──> AUTO  (1,N)→(N,1) -->
+  <line x1="160" y1="342" x2="235" y2="285" stroke="#555" stroke-width="1.5"/>
+  <text x="163" y="354" fill="#555" font-size="10">(1,N)</text>
+  <text x="228" y="278" fill="#555" font-size="10">(N,1)</text>
+  <rect x="165" y="298" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="191" y="310" text-anchor="middle" fill="#333" font-size="10" font-style="italic">fornisce</text>
 
-  <!-- linee MARCA/FORNITORE→AUTO -->
-  <line x1="170" y1="100" x2="230" y2="170" stroke="#6c757d" stroke-width="1.5"/>
-  <line x1="170" y1="273" x2="230" y2="235" stroke="#6c757d" stroke-width="1.5"/>
+  <!-- AUTO ──richiede──> MANUTENZIONE  (1,N)→(N,1) -->
+  <line x1="310" y1="335" x2="305" y2="490" stroke="#555" stroke-width="1.5"/>
+  <text x="315" y="355" fill="#555" font-size="10">(1,N)</text>
+  <text x="315" y="480" fill="#555" font-size="10">(N,1)</text>
+  <rect x="275" y="398" width="56" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="303" y="410" text-anchor="middle" fill="#333" font-size="10" font-style="italic">richiede</text>
 
-  <!-- ===== CLIENTE ===== -->
-  <rect x="460" y="120" width="185" height="160" rx="6" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
-  <rect x="460" y="120" width="185" height="24" rx="6" fill="#27ae60"/>
-  <rect x="460" y="138" width="185" height="6" fill="#27ae60"/>
-  <text x="552" y="137" text-anchor="middle" fill="white" font-weight="bold">CLIENTE</text>
-  <text x="552" y="114" text-anchor="middle" fill="#555" font-size="10">(0,N) Vendita  specializza→ Privato/Azienda</text>
-  <text x="476" y="160" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="496" y="160" fill="#1a1a1a" font-size="11">id_cliente</text>
-  <text x="476" y="176" fill="#555" font-size="11">   email</text>
-  <text x="476" y="192" fill="#555" font-size="11">   telefono</text>
-  <text x="476" y="208" fill="#555" font-size="11">   citta</text>
-  <text x="476" y="224" fill="#555" font-size="11">   tipo_cliente</text>
-  <text x="476" y="244" fill="#27ae60" font-size="10" font-style="italic">generalizzazione totale ed esclusiva</text>
-  <text x="476" y="258" fill="#27ae60" font-size="10" font-style="italic">→ Privato OPPURE Azienda</text>
+  <!-- CLIENTE ──effettua──> VENDITA  (1,N)→(N,1) -->
+  <line x1="650" y1="145" x2="875" y2="360" stroke="#555" stroke-width="1.5"/>
+  <text x="655" y="138" fill="#555" font-size="10">(1,N)</text>
+  <text x="830" y="365" fill="#555" font-size="10">(N,1)</text>
+  <rect x="730" y="228" width="52" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="756" y="240" text-anchor="middle" fill="#333" font-size="10" font-style="italic">effettua</text>
 
-  <!-- ===== PRIVATO ===== -->
-  <rect x="360" y="360" width="180" height="180" rx="6" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
-  <rect x="360" y="360" width="180" height="24" rx="6" fill="#2196f3"/>
-  <rect x="360" y="378" width="180" height="6" fill="#2196f3"/>
-  <text x="450" y="377" text-anchor="middle" fill="white" font-weight="bold">PRIVATO</text>
-  <text x="450" y="354" text-anchor="middle" fill="#555" font-size="10">specializzazione di CLIENTE (1,1)</text>
-  <text x="376" y="400" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="396" y="400" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="420" y="400" fill="#c0392b" font-size="11">id_cliente → CLIENTE</text>
-  <text x="376" y="416" fill="#555" font-size="11">   codice_fiscale</text>
-  <text x="376" y="432" fill="#555" font-size="11">   nome</text>
-  <text x="376" y="448" fill="#555" font-size="11">   cognome</text>
-  <text x="376" y="464" fill="#555" font-size="11">   data_nascita</text>
-  <text x="376" y="484" fill="#2196f3" font-size="10" font-style="italic">PK = FK (OneToOne)</text>
-  <text x="376" y="498" fill="#555" font-size="10" font-style="italic">(1,1) → (1,1) con CLIENTE</text>
-  <!-- freccia specializzazione CLIENTE→PRIVATO -->
-  <line x1="500" y1="280" x2="450" y2="360" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="458" y="330" fill="#27ae60" font-size="10">specializza</text>
+  <!-- DIPENDENTE ──gestisce──> VENDITA  (1,N)→(N,1) -->
+  <line x1="950" y1="200" x2="957" y2="285" stroke="#555" stroke-width="1.5"/>
+  <text x="960" y="220" fill="#555" font-size="10">(1,N)</text>
+  <text x="960" y="278" fill="#555" font-size="10">(N,1)</text>
+  <rect x="910" y="235" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="937" y="247" text-anchor="middle" fill="#333" font-size="10" font-style="italic">gestisce</text>
 
-  <!-- ===== AZIENDA ===== -->
-  <rect x="610" y="360" width="180" height="165" rx="6" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
-  <rect x="610" y="360" width="180" height="24" rx="6" fill="#ff9800"/>
-  <rect x="610" y="378" width="180" height="6" fill="#ff9800"/>
-  <text x="700" y="377" text-anchor="middle" fill="white" font-weight="bold">AZIENDA</text>
-  <text x="700" y="354" text-anchor="middle" fill="#555" font-size="10">specializzazione di CLIENTE (1,1)</text>
-  <text x="626" y="400" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="646" y="400" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="670" y="400" fill="#c0392b" font-size="11">id_cliente → CLIENTE</text>
-  <text x="626" y="416" fill="#555" font-size="11">   partita_iva</text>
-  <text x="626" y="432" fill="#555" font-size="11">   ragione_sociale</text>
-  <text x="626" y="448" fill="#555" font-size="11">   settore</text>
-  <text x="626" y="468" fill="#ff9800" font-size="10" font-style="italic">PK = FK (OneToOne)</text>
-  <text x="626" y="482" fill="#555" font-size="10" font-style="italic">(1,1) → (1,1) con CLIENTE</text>
-  <!-- freccia specializzazione CLIENTE→AZIENDA -->
-  <line x1="600" y1="280" x2="660" y2="360" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="620" y="330" fill="#27ae60" font-size="10">specializza</text>
+  <!-- CLIENTE ──specializza──> PRIVATO  (1,1)→(1,1) dashed -->
+  <line x1="530" y1="210" x2="455" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="490" y="278" fill="#27ae60" font-size="10" font-style="italic">specializza</text>
+  <text x="512" y="218" fill="#27ae60" font-size="10">(1,1)</text>
+  <text x="430" y="374" fill="#27ae60" font-size="10">(1,1)</text>
 
-  <!-- ===== DIPENDENTE ===== -->
-  <rect x="920" y="50" width="165" height="145" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="920" y="50" width="165" height="24" rx="6" fill="#343a40"/>
-  <rect x="920" y="68" width="165" height="6" fill="#343a40"/>
-  <text x="1002" y="67" text-anchor="middle" fill="white" font-weight="bold">DIPENDENTE</text>
-  <text x="1002" y="44" text-anchor="middle" fill="#555" font-size="10">(1,N) Vendita gestisce</text>
-  <text x="936" y="90" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="956" y="90" fill="#1a1a1a" font-size="11">id_dipendente</text>
-  <text x="936" y="106" fill="#555" font-size="11">   nome</text>
-  <text x="936" y="122" fill="#555" font-size="11">   cognome</text>
-  <text x="936" y="138" fill="#555" font-size="11">   ruolo</text>
-  <text x="936" y="154" fill="#555" font-size="11">   stipendio</text>
+  <!-- CLIENTE ──specializza──> AZIENDA  (1,1)→(1,1) dashed -->
+  <line x1="620" y1="210" x2="672" y2="380" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="625" y="278" fill="#27ae60" font-size="10" font-style="italic">specializza</text>
+  <text x="620" y="218" fill="#27ae60" font-size="10">(1,1)</text>
+  <text x="674" y="374" fill="#27ae60" font-size="10">(1,1)</text>
 
-  <!-- ===== VENDITA ===== -->
-  <rect x="840" y="250" width="185" height="195" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="840" y="250" width="185" height="24" rx="6" fill="#343a40"/>
-  <rect x="840" y="268" width="185" height="6" fill="#343a40"/>
-  <text x="932" y="267" text-anchor="middle" fill="white" font-weight="bold">VENDITA</text>
-  <text x="932" y="244" text-anchor="middle" fill="#555" font-size="10">(0,N) per Cliente  (1,N) DetVendita</text>
-  <text x="856" y="290" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="876" y="290" fill="#1a1a1a" font-size="11">id_vendita</text>
-  <text x="856" y="306" fill="#555" font-size="11">   data_vendita</text>
-  <text x="856" y="322" fill="#555" font-size="11">   importo_totale</text>
-  <text x="856" y="342" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="876" y="342" fill="#c0392b" font-size="11">id_cliente → CLIENTE</text>
-  <text x="856" y="358" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="876" y="358" fill="#c0392b" font-size="11">id_dipendente → DIP.</text>
-  <text x="856" y="378" fill="#555" font-size="10" font-style="italic">(N,1) per Cliente e Dipendente</text>
-  <text x="856" y="392" fill="#27ae60" font-size="10" font-style="italic">un'unica FK per tutti i clienti ✓</text>
-  <text x="856" y="406" fill="#555" font-size="10" font-style="italic">(0,N) in Dettaglio_Vendita</text>
+  <!-- VENDITA ──contiene──> DETTAGLIO_VENDITA  (1,N)→(N,1) -->
+  <line x1="940" y1="445" x2="745" y2="580" stroke="#555" stroke-width="1.5"/>
+  <text x="935" y="458" fill="#555" font-size="10">(1,N)</text>
+  <text x="746" y="572" fill="#555" font-size="10">(N,1)</text>
+  <rect x="843" y="493" width="54" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="870" y="505" text-anchor="middle" fill="#333" font-size="10" font-style="italic">contiene</text>
 
-  <!-- linea DIPENDENTE→VENDITA -->
-  <line x1="1002" y1="195" x2="1002" y2="250" stroke="#6c757d" stroke-width="1.5"/>
-  <!-- linea CLIENTE→VENDITA -->
-  <line x1="645" y1="200" x2="840" y2="310" stroke="#6c757d" stroke-width="1.5"/>
+  <!-- AUTO ──inclusa in──> DETTAGLIO_VENDITA  (1,N)→(N,1) -->
+  <line x1="360" y1="310" x2="570" y2="610" stroke="#555" stroke-width="1.5"/>
+  <text x="345" y="308" fill="#555" font-size="10">(1,N)</text>
+  <text x="568" y="625" fill="#555" font-size="10">(N,1)</text>
+  <rect x="430" y="433" width="60" height="16" rx="4" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+  <text x="460" y="445" text-anchor="middle" fill="#333" font-size="10" font-style="italic">inclusa in</text>
 
-  <!-- ===== MANUTENZIONE ===== -->
-  <rect x="230" y="400" width="165" height="145" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="230" y="400" width="165" height="24" rx="6" fill="#343a40"/>
-  <rect x="230" y="418" width="165" height="6" fill="#343a40"/>
-  <text x="312" y="417" text-anchor="middle" fill="white" font-weight="bold">MANUTENZIONE</text>
-  <text x="312" y="394" text-anchor="middle" fill="#555" font-size="10">(N,1) richiede AUTO</text>
-  <text x="246" y="440" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="266" y="440" fill="#1a1a1a" font-size="11">id_manutenzione</text>
-  <text x="246" y="456" fill="#555" font-size="11">   data_intervento</text>
-  <text x="246" y="472" fill="#555" font-size="11">   descrizione</text>
-  <text x="246" y="488" fill="#555" font-size="11">   costo</text>
-  <text x="246" y="508" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="266" y="508" fill="#c0392b" font-size="11">id_auto → AUTO</text>
-  <text x="246" y="524" fill="#555" font-size="10" font-style="italic">(0,N) per AUTO</text>
+  <!-- ══════════════════════════════════════════
+       TABELLE
+       ══════════════════════════════════════════ -->
 
-  <!-- linea AUTO→MANUTENZIONE -->
-  <line x1="312" y1="315" x2="312" y2="400" stroke="#6c757d" stroke-width="1.5"/>
+  <!-- MARCA -->
+  <rect x="30" y="90" width="130" height="95" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="30" y="90" width="130" height="22" rx="5" fill="#343a40"/>
+  <rect x="30" y="106" width="130" height="6" fill="#343a40"/>
+  <text x="95" y="105" text-anchor="middle" fill="white" font-weight="bold" font-size="12">MARCA</text>
+  <text x="44" y="126" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="62" y="126" fill="#333" font-size="11">id_marca</text>
+  <text x="44" y="142" fill="#555" font-size="11">   nome</text>
+  <text x="44" y="158" fill="#555" font-size="11">   paese</text>
 
-  <!-- ===== DETTAGLIO_VENDITA ===== -->
-  <rect x="560" y="580" width="215" height="130" rx="6" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
-  <rect x="560" y="580" width="215" height="24" rx="6" fill="#343a40"/>
-  <rect x="560" y="598" width="215" height="6" fill="#343a40"/>
-  <text x="667" y="597" text-anchor="middle" fill="white" font-weight="bold">DETTAGLIO_VENDITA</text>
-  <text x="667" y="574" text-anchor="middle" fill="#555" font-size="10">(N,M) risolve Vendita↔Auto</text>
-  <text x="576" y="620" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="596" y="620" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="620" y="620" fill="#c0392b" font-size="11">id_vendita → VENDITA</text>
-  <text x="576" y="636" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="596" y="636" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="620" y="636" fill="#c0392b" font-size="11">id_auto → AUTO</text>
-  <text x="576" y="652" fill="#555" font-size="11">   quantita</text>
-  <text x="576" y="668" fill="#555" font-size="11">   prezzo_unitario</text>
-  <text x="576" y="684" fill="#555" font-size="10" font-style="italic">PK composta: (id_vendita, id_auto)</text>
+  <!-- FORNITORE -->
+  <rect x="30" y="295" width="130" height="95" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="30" y="295" width="130" height="22" rx="5" fill="#343a40"/>
+  <rect x="30" y="311" width="130" height="6" fill="#343a40"/>
+  <text x="95" y="310" text-anchor="middle" fill="white" font-weight="bold" font-size="12">FORNITORE</text>
+  <text x="44" y="331" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="62" y="331" fill="#333" font-size="11">id_fornitore</text>
+  <text x="44" y="347" fill="#555" font-size="11">   nome</text>
+  <text x="44" y="363" fill="#555" font-size="11">   paese</text>
 
-  <!-- linea VENDITA→DETTAGLIO -->
-  <line x1="932" y1="445" x2="775" y2="595" stroke="#6c757d" stroke-width="1.5"/>
-  <!-- linea AUTO→DETTAGLIO -->
-  <line x1="395" y1="295" x2="560" y2="625" stroke="#6c757d" stroke-width="1.5"/>
+  <!-- AUTO -->
+  <rect x="235" y="160" width="150" height="175" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="235" y="160" width="150" height="22" rx="5" fill="#343a40"/>
+  <rect x="235" y="176" width="150" height="6" fill="#343a40"/>
+  <text x="310" y="175" text-anchor="middle" fill="white" font-weight="bold" font-size="12">AUTO</text>
+  <text x="249" y="196" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="267" y="196" fill="#333" font-size="11">id_auto</text>
+  <text x="249" y="212" fill="#555" font-size="11">   modello</text>
+  <text x="249" y="228" fill="#555" font-size="11">   prezzo</text>
+  <text x="249" y="244" fill="#555" font-size="11">   anno</text>
+  <text x="249" y="260" fill="#555" font-size="11">   stato</text>
+  <line x1="241" y1="267" x2="379" y2="267" stroke="#ddd" stroke-width="1"/>
+  <text x="249" y="282" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="267" y="282" fill="#e74c3c" font-size="11">id_marca</text>
+  <text x="249" y="298" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="267" y="298" fill="#e74c3c" font-size="11">id_fornitore</text>
 
-  <!-- Legenda -->
-  <rect x="20" y="640" width="200" height="75" rx="4" fill="#f8f9fa" stroke="#aaa" stroke-width="1"/>
-  <text x="120" y="660" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="bold">Legenda</text>
-  <text x="36" y="676" fill="#1a1a1a" font-size="11" font-weight="bold">PK</text>
-  <text x="56" y="676" fill="#555" font-size="11">= Chiave Primaria</text>
-  <text x="36" y="692" fill="#c0392b" font-size="11" font-weight="bold">FK</text>
-  <text x="56" y="692" fill="#555" font-size="11">= Chiave Esterna</text>
-  <line x1="36" y1="704" x2="56" y2="704" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="62" y="708" fill="#27ae60" font-size="11">= Specializzazione</text>
+  <!-- MANUTENZIONE -->
+  <rect x="230" y="490" width="155" height="120" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="230" y="490" width="155" height="22" rx="5" fill="#343a40"/>
+  <rect x="230" y="506" width="155" height="6" fill="#343a40"/>
+  <text x="307" y="505" text-anchor="middle" fill="white" font-weight="bold" font-size="12">MANUTENZIONE</text>
+  <text x="244" y="526" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="262" y="526" fill="#333" font-size="11">id_manutenzione</text>
+  <text x="244" y="542" fill="#555" font-size="11">   data_intervento</text>
+  <text x="244" y="558" fill="#555" font-size="11">   descrizione</text>
+  <text x="244" y="574" fill="#555" font-size="11">   costo</text>
+  <line x1="236" y1="580" x2="379" y2="580" stroke="#ddd" stroke-width="1"/>
+  <text x="244" y="596" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="262" y="596" fill="#e74c3c" font-size="11">id_auto</text>
 
-  <!-- Box motivazione scelta -->
-  <rect x="240" y="640" width="940" height="75" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="1.5"/>
-  <text x="710" y="660" text-anchor="middle" fill="#1b5e20" font-size="12" font-weight="bold">Soluzione adottata: "table per subclass" — tre tabelle distinte</text>
-  <text x="710" y="678" text-anchor="middle" fill="#2e7d32" font-size="11">CLIENTE contiene gli attributi comuni (email, telefono, citta). PRIVATO e AZIENDA estendono CLIENTE con PK=FK (OneToOne).</text>
-  <text x="710" y="696" text-anchor="middle" fill="#2e7d32" font-size="11">Nessun valore NULL strutturale. Un'unica FK in VENDITA (id_cliente) copre sia privati che aziende. Totalità ed esclusività garantite.</text>
-  <text x="710" y="714" text-anchor="middle" fill="#2e7d32" font-size="11">Cardinalità specializzazione: ogni CLIENTE (1,1) corrisponde a un PRIVATO o AZIENDA (1,1). Nessun cliente "generico" senza sottotipo.</text>
+  <!-- CLIENTE -->
+  <rect x="490" y="80" width="160" height="130" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
+  <rect x="490" y="80" width="160" height="22" rx="5" fill="#27ae60"/>
+  <rect x="490" y="96" width="160" height="6" fill="#27ae60"/>
+  <text x="570" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="12">CLIENTE</text>
+  <text x="504" y="116" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="522" y="116" fill="#333" font-size="11">id_cliente</text>
+  <text x="504" y="132" fill="#555" font-size="11">   email</text>
+  <text x="504" y="148" fill="#555" font-size="11">   telefono</text>
+  <text x="504" y="164" fill="#555" font-size="11">   citta</text>
+  <text x="504" y="180" fill="#555" font-size="11">   tipo_cliente</text>
+  <text x="504" y="198" fill="#27ae60" font-size="10" font-style="italic">↓ totale ed esclusiva ↓</text>
+
+  <!-- PRIVATO -->
+  <rect x="365" y="380" width="160" height="140" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+  <rect x="365" y="380" width="160" height="22" rx="5" fill="#2196f3"/>
+  <rect x="365" y="396" width="160" height="6" fill="#2196f3"/>
+  <text x="445" y="395" text-anchor="middle" fill="white" font-weight="bold" font-size="12">PRIVATO</text>
+  <text x="379" y="416" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
+  <text x="397" y="416" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
+  <text x="423" y="416" fill="#e74c3c" font-size="11">id_cliente</text>
+  <text x="379" y="432" fill="#555" font-size="11">   codice_fiscale</text>
+  <text x="379" y="448" fill="#555" font-size="11">   nome</text>
+  <text x="379" y="464" fill="#555" font-size="11">   cognome</text>
+  <text x="379" y="480" fill="#555" font-size="11">   data_nascita</text>
+  <text x="379" y="496" fill="#2196f3" font-size="10" font-style="italic">PK = FK (OneToOne)</text>
+
+  <!-- AZIENDA -->
+  <rect x="600" y="380" width="155" height="125" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <rect x="600" y="380" width="155" height="22" rx="5" fill="#ff9800"/>
+  <rect x="600" y="396" width="155" height="6" fill="#ff9800"/>
+  <text x="677" y="395" text-anchor="middle" fill="white" font-weight="bold" font-size="12">AZIENDA</text>
+  <text x="614" y="416" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
+  <text x="632" y="416" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
+  <text x="658" y="416" fill="#e74c3c" font-size="11">id_cliente</text>
+  <text x="614" y="432" fill="#555" font-size="11">   partita_iva</text>
+  <text x="614" y="448" fill="#555" font-size="11">   ragione_sociale</text>
+  <text x="614" y="464" fill="#555" font-size="11">   settore</text>
+  <text x="614" y="480" fill="#ff9800" font-size="10" font-style="italic">PK = FK (OneToOne)</text>
+
+  <!-- DIPENDENTE -->
+  <rect x="875" y="75" width="155" height="125" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="875" y="75" width="155" height="22" rx="5" fill="#343a40"/>
+  <rect x="875" y="91" width="155" height="6" fill="#343a40"/>
+  <text x="952" y="90" text-anchor="middle" fill="white" font-weight="bold" font-size="12">DIPENDENTE</text>
+  <text x="889" y="110" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="907" y="110" fill="#333" font-size="11">id_dipendente</text>
+  <text x="889" y="126" fill="#555" font-size="11">   nome</text>
+  <text x="889" y="142" fill="#555" font-size="11">   cognome</text>
+  <text x="889" y="158" fill="#555" font-size="11">   ruolo</text>
+  <text x="889" y="174" fill="#555" font-size="11">   stipendio</text>
+
+  <!-- VENDITA -->
+  <rect x="875" y="285" width="165" height="160" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="875" y="285" width="165" height="22" rx="5" fill="#343a40"/>
+  <rect x="875" y="301" width="165" height="6" fill="#343a40"/>
+  <text x="957" y="300" text-anchor="middle" fill="white" font-weight="bold" font-size="12">VENDITA</text>
+  <text x="889" y="320" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="907" y="320" fill="#333" font-size="11">id_vendita</text>
+  <text x="889" y="336" fill="#555" font-size="11">   data_vendita</text>
+  <text x="889" y="352" fill="#555" font-size="11">   importo_totale</text>
+  <line x1="881" y1="360" x2="1034" y2="360" stroke="#ddd" stroke-width="1"/>
+  <text x="889" y="376" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="376" fill="#e74c3c" font-size="11">id_cliente</text>
+  <text x="889" y="392" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="907" y="392" fill="#e74c3c" font-size="11">id_dipendente</text>
+
+  <!-- DETTAGLIO_VENDITA -->
+  <rect x="570" y="570" width="185" height="115" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
+  <rect x="570" y="570" width="185" height="22" rx="5" fill="#343a40"/>
+  <rect x="570" y="586" width="185" height="6" fill="#343a40"/>
+  <text x="662" y="585" text-anchor="middle" fill="white" font-weight="bold" font-size="12">DETTAGLIO_VENDITA</text>
+  <text x="584" y="606" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
+  <text x="602" y="606" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
+  <text x="628" y="606" fill="#e74c3c" font-size="11">id_vendita</text>
+  <text x="584" y="622" fill="#c0392b" font-size="11" font-weight="bold">PK</text>
+  <text x="602" y="622" fill="#e74c3c" font-size="11" font-weight="bold">/FK</text>
+  <text x="628" y="622" fill="#e74c3c" font-size="11">id_auto</text>
+  <text x="584" y="638" fill="#555" font-size="11">   quantita</text>
+  <text x="584" y="654" fill="#555" font-size="11">   prezzo_unitario</text>
+  <text x="584" y="670" fill="#aaa" font-size="10" font-style="italic">PK composta: (id_vendita, id_auto)</text>
+
+  <!-- ══════ LEGENDA ══════ -->
+  <rect x="30" y="700" width="480" height="90" rx="5" fill="#f8f9fa" stroke="#aaa" stroke-width="1"/>
+  <text x="270" y="718" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Legenda</text>
+  <text x="46" y="736" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="66" y="736" fill="#555" font-size="11">= Chiave Primaria</text>
+  <text x="200" y="736" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="220" y="736" fill="#555" font-size="11">= Chiave Esterna</text>
+  <text x="46" y="752" fill="#c0392b" font-size="11" font-weight="bold">PK/FK</text><text x="80" y="752" fill="#555" font-size="11">= PK che è anche FK (specializzazione OneToOne)</text>
+  <line x1="46" y1="766" x2="76" y2="766" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="82" y="770" fill="#27ae60" font-size="11">= Specializzazione (totale ed esclusiva)</text>
+  <text x="46" y="784" fill="#555" font-size="11">(min,max) = cardinalità minima e massima della relazione</text>
+
+  <!-- ══════ NOTE CARDINALITÀ ══════ -->
+  <rect x="530" y="700" width="740" height="90" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="1"/>
+  <text x="900" y="718" text-anchor="middle" fill="#1b5e20" font-size="11" font-weight="bold">Cardinalità delle relazioni</text>
+  <text x="546" y="734" fill="#2e7d32" font-size="11">MARCA(1,N) produce AUTO(N,1) — una marca ha almeno 1 auto; ogni auto ha esattamente 1 marca</text>
+  <text x="546" y="750" fill="#2e7d32" font-size="11">FORNITORE(1,N) fornisce AUTO(N,1) — ogni auto ha esattamente 1 fornitore</text>
+  <text x="546" y="766" fill="#2e7d32" font-size="11">AUTO(1,N) richiede MANUTENZIONE(N,1) — un'auto può avere 0 o più manutenzioni</text>
+  <text x="546" y="782" fill="#2e7d32" font-size="11">CLIENTE(1,N) effettua VENDITA(N,1) — DIPENDENTE(1,N) gestisce VENDITA(N,1)</text>
 </svg>
