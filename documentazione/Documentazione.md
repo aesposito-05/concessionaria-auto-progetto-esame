@@ -197,15 +197,31 @@ MANUTENZIONE(
 
 *Nota: in `PRIVATO`, `AZIENDA` e `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella — è proprio la tecnica usata per realizzare la generalizzazione (paragrafo 2.3) e la tabella ponte N:M (paragrafo 2.1).*
 
-### 2.3 Derivazione della generalizzazione
+### 2.3 I due scenari alternativi per la generalizzazione
+
+Prima di descrivere la soluzione adottata, si analizzano i due scenari alternativi con i rispettivi problemi.
+
+**Scenario 1 — Tabella unica con tutti gli attributi**
+
+Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Privato che di Azienda. Ogni riga ha sempre metà dei campi vuoti (NULL): un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL. Lo schema risulta denormalizzato e spreca spazio.
+
+![Diagramma E-R Scenario 1 - tabella unica](immagini/er_scenario1_tabella_unica.svg)
+
+**Scenario 2 — Solo le due tabelle figlie, senza tabella padre**
+
+Si eliminano gli attributi comuni e si creano solo `privato` e `azienda`, ognuna con tutti i propri attributi. Gli attributi comuni (`email`, `telefono`, `citta`) vengono duplicati in entrambe le tabelle. Non esiste un unico posto dove cercare un cliente: se si vuole trovare un cliente per email bisogna cercare in entrambe le tabelle. Inoltre la tabella Vendita dovrebbe avere due chiavi esterne separate, una verso `privato` e una verso `azienda`.
+
+![Diagramma E-R Scenario 2 - due tabelle senza padre](immagini/er_scenario2_due_tabelle.svg)
+
+### 2.4 Derivazione della generalizzazione
 
 Per tradurre la generalizzazione Cliente → Privato/Azienda è stata adottata la strategia "tabella per ogni entità": una tabella `cliente` contiene gli attributi comuni, mentre `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Questa strategia è preferibile rispetto a un'unica tabella con tutti gli attributi (che produrrebbe molti valori NULL) perché mantiene lo schema normalizzato, al costo di richiedere un JOIN per ricostruire il profilo completo di un cliente.
 
-### 2.4 Semplificazioni e adattamenti
+### 2.5 Semplificazioni e adattamenti
 
 Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dichiarativo, che ogni riga di `cliente` abbia esattamente una riga corrispondente in `privato` oppure in `azienda`: il vincolo di totalità ed esclusività della partizione richiederebbe un trigger che verifichi l'esistenza incrociata fra tabelle ogni volta che viene inserito un cliente. Per restare entro i limiti di un progetto didattico, è stato introdotto in `cliente` un attributo discriminante `tipo_cliente`, vincolato tramite CHECK ai valori `privato` e `azienda`, demandando all'applicazione Django la responsabilità di creare sempre la riga di specializzazione corretta al momento della registrazione di un nuovo cliente. È una scelta pragmatica, dichiarata esplicitamente come semplificazione rispetto al modello concettuale puro.
 
-### 2.5 Vincoli principali
+### 2.6 Vincoli principali
 
 | Tabella | Vincolo |
 |---|---|
@@ -217,7 +233,7 @@ Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dic
 | dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
 | manutenzione | `id_auto` FK NOT NULL |
 
-### 2.6 Script di creazione delle tabelle
+### 2.7 Script di creazione delle tabelle
 
 ```sql
 CREATE DATABASE concessionaria_auto;
@@ -370,7 +386,7 @@ La pagina `/manutenzioni/` presenta un menu a tendina con tutte le auto del parc
 
 ### 3.4 Scelte implementative notevoli
 
-- **Generalizzazione nel codice**: la view di registrazione crea sempre sia il record `Cliente` sia il record `Privato`/`Azienda` nella stessa transazione, garantendo il vincolo di totalità descritto nella sezione 2.4.
+- **Generalizzazione nel codice**: la view di registrazione crea sempre sia il record `Cliente` sia il record `Privato`/`Azienda` nella stessa transazione, garantendo il vincolo di totalità descritto nella sezione 2.5.
 - **Protezione CSRF**: tutti i form POST usano `{% csrf_token %}`. Il logout è implementato come form POST (non link GET) per rispettare la protezione CSRF e il requisito di Django 6.
 - **ORM e query efficienti**: le view usano `select_related` e `prefetch_related` per evitare il problema N+1 nelle pagine che attraversano relazioni (es. storico vendite con dettagli e auto).
 - **Validazione**: i form verificano unicità di email, codice fiscale e partita IVA prima del salvataggio, restituendo errori inline nel form.
