@@ -19,7 +19,19 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
 ## Indice
 
 1. Analisi e progettazione concettuale
+   - 1.1 Descrizione del dominio
+   - 1.2 Entità e attributi
+   - 1.3 Relazioni
+   - 1.4 Generalizzazione e specializzazione
+   - 1.5 I due scenari alternativi per la generalizzazione
+   - 1.6 Diagramma E-R
+   - 1.7 Derivazione della generalizzazione
+   - 1.8 Semplificazioni e adattamenti
+   - 1.9 Vincoli principali
 2. Progettazione logica
+   - 2.1 Regole di derivazione
+   - 2.2 Elenco delle entità e degli attributi
+   - 2.3 Script di creazione delle tabelle
 3. Implementazione del sistema informativo
 4. Istruzioni per installazione e avvio
 5. Bonus
@@ -71,11 +83,47 @@ Dall'alto (approccio top-down): partendo dall'entità Cliente, si riconosce la n
 
 La specializzazione è **totale**, poiché ogni cliente registrato nel sistema deve obbligatoriamente essere o un privato o un'azienda — non esistono clienti "generici" privi di una delle due caratterizzazioni. È inoltre **esclusiva**, poiché un singolo cliente non può appartenere a entrambe le categorie contemporaneamente. Totalità ed esclusività, insieme, definiscono una **partizione completa** dell'entità Cliente nelle due sottoclassi Privato e Azienda.
 
-### 1.5 Diagramma E-R
+### 1.5 I due scenari alternativi per la generalizzazione
+
+Prima di descrivere la soluzione adottata, si analizzano i due scenari alternativi con i rispettivi problemi.
+
+**Scenario 1 — Tabella unica con tutti gli attributi**
+
+Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Privato che di Azienda. Ogni riga ha sempre metà dei campi vuoti (NULL): un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL. Lo schema risulta denormalizzato e spreca spazio.
+
+![Diagramma E-R Scenario 1 - tabella unica](immagini/er_scenario1_tabella_unica.svg)
+
+**Scenario 2 — Solo le due tabelle figlie, senza tabella padre**
+
+Si eliminano gli attributi comuni e si creano solo `privato` e `azienda`, ognuna con tutti i propri attributi. Gli attributi comuni (`email`, `telefono`, `citta`) vengono duplicati in entrambe le tabelle. Non esiste un unico posto dove cercare un cliente: se si vuole trovare un cliente per email bisogna cercare in entrambe le tabelle. Inoltre la tabella Vendita dovrebbe avere due chiavi esterne separate, una verso `privato` e una verso `azienda`.
+
+![Diagramma E-R Scenario 2 - due tabelle senza padre](immagini/er_scenario2_due_tabelle.svg)
+
+### 1.6 Diagramma E-R
 
 ![Diagramma E-R completo della concessionaria auto](immagini/er_completo.svg)
 
 *Nota: nel diagramma ogni tabella riporta le proprie chiavi primarie (PK), chiavi esterne (FK) e le cardinalità minima e massima di ciascuna relazione. Il vincolo di totalità ed esclusività della specializzazione Cliente → Privato/Azienda — descritto nel paragrafo 1.4 — è indicato con frecce tratteggiate verdi e con la nota "PK = FK (OneToOne)": ogni cliente deve avere esattamente una riga corrispondente in Privato oppure in Azienda.*
+
+### 1.7 Derivazione della generalizzazione
+
+Per tradurre la generalizzazione Cliente → Privato/Azienda è stata adottata la strategia "tabella per ogni entità": una tabella `cliente` contiene gli attributi comuni, mentre `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Questa strategia è preferibile rispetto a un'unica tabella con tutti gli attributi (che produrrebbe molti valori NULL) perché mantiene lo schema normalizzato, al costo di richiedere un JOIN per ricostruire il profilo completo di un cliente.
+
+### 1.8 Semplificazioni e adattamenti
+
+Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dichiarativo, che ogni riga di `cliente` abbia esattamente una riga corrispondente in `privato` oppure in `azienda`: il vincolo di totalità ed esclusività della partizione richiederebbe un trigger che verifichi l'esistenza incrociata fra tabelle ogni volta che viene inserito un cliente. Per restare entro i limiti di un progetto didattico, è stato introdotto in `cliente` un attributo discriminante `tipo_cliente`, vincolato tramite CHECK ai valori `privato` e `azienda`, demandando all'applicazione Django la responsabilità di creare sempre la riga di specializzazione corretta al momento della registrazione di un nuovo cliente. È una scelta pragmatica, dichiarata esplicitamente come semplificazione rispetto al modello concettuale puro.
+
+### 1.9 Vincoli principali
+
+| Tabella | Vincolo |
+|---|---|
+| cliente | `email` UNIQUE NOT NULL; `tipo_cliente` CHECK IN (privato, azienda) |
+| privato | `id_cliente` PK/FK verso cliente; `codice_fiscale` UNIQUE NOT NULL |
+| azienda | `id_cliente` PK/FK verso cliente; `partita_iva` UNIQUE NOT NULL |
+| auto | `prezzo` CHECK (> 0); `stato` CHECK IN (disponibile, venduta, manutenzione); `id_marca`/`id_fornitore` FK NOT NULL |
+| vendita | `id_cliente`/`id_dipendente` FK NOT NULL |
+| dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
+| manutenzione | `id_auto` FK NOT NULL |
 
 ---
 
@@ -195,45 +243,9 @@ MANUTENZIONE(
 )
 ```
 
-*Nota: in `PRIVATO`, `AZIENDA` e `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella — è proprio la tecnica usata per realizzare la generalizzazione (paragrafo 2.3) e la tabella ponte N:M (paragrafo 2.1).*
+*Nota: in `PRIVATO`, `AZIENDA` e `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella — è proprio la tecnica usata per realizzare la generalizzazione (paragrafo 1.7) e la tabella ponte N:M (paragrafo 2.1).*
 
-### 2.3 I due scenari alternativi per la generalizzazione
-
-Prima di descrivere la soluzione adottata, si analizzano i due scenari alternativi con i rispettivi problemi.
-
-**Scenario 1 — Tabella unica con tutti gli attributi**
-
-Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Privato che di Azienda. Ogni riga ha sempre metà dei campi vuoti (NULL): un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL. Lo schema risulta denormalizzato e spreca spazio.
-
-![Diagramma E-R Scenario 1 - tabella unica](immagini/er_scenario1_tabella_unica.svg)
-
-**Scenario 2 — Solo le due tabelle figlie, senza tabella padre**
-
-Si eliminano gli attributi comuni e si creano solo `privato` e `azienda`, ognuna con tutti i propri attributi. Gli attributi comuni (`email`, `telefono`, `citta`) vengono duplicati in entrambe le tabelle. Non esiste un unico posto dove cercare un cliente: se si vuole trovare un cliente per email bisogna cercare in entrambe le tabelle. Inoltre la tabella Vendita dovrebbe avere due chiavi esterne separate, una verso `privato` e una verso `azienda`.
-
-![Diagramma E-R Scenario 2 - due tabelle senza padre](immagini/er_scenario2_due_tabelle.svg)
-
-### 2.4 Derivazione della generalizzazione
-
-Per tradurre la generalizzazione Cliente → Privato/Azienda è stata adottata la strategia "tabella per ogni entità": una tabella `cliente` contiene gli attributi comuni, mentre `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Questa strategia è preferibile rispetto a un'unica tabella con tutti gli attributi (che produrrebbe molti valori NULL) perché mantiene lo schema normalizzato, al costo di richiedere un JOIN per ricostruire il profilo completo di un cliente.
-
-### 2.5 Semplificazioni e adattamenti
-
-Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dichiarativo, che ogni riga di `cliente` abbia esattamente una riga corrispondente in `privato` oppure in `azienda`: il vincolo di totalità ed esclusività della partizione richiederebbe un trigger che verifichi l'esistenza incrociata fra tabelle ogni volta che viene inserito un cliente. Per restare entro i limiti di un progetto didattico, è stato introdotto in `cliente` un attributo discriminante `tipo_cliente`, vincolato tramite CHECK ai valori `privato` e `azienda`, demandando all'applicazione Django la responsabilità di creare sempre la riga di specializzazione corretta al momento della registrazione di un nuovo cliente. È una scelta pragmatica, dichiarata esplicitamente come semplificazione rispetto al modello concettuale puro.
-
-### 2.6 Vincoli principali
-
-| Tabella | Vincolo |
-|---|---|
-| cliente | `email` UNIQUE NOT NULL; `tipo_cliente` CHECK IN (privato, azienda) |
-| privato | `id_cliente` PK/FK verso cliente; `codice_fiscale` UNIQUE NOT NULL |
-| azienda | `id_cliente` PK/FK verso cliente; `partita_iva` UNIQUE NOT NULL |
-| auto | `prezzo` CHECK (> 0); `stato` CHECK IN (disponibile, venduta, manutenzione); `id_marca`/`id_fornitore` FK NOT NULL |
-| vendita | `id_cliente`/`id_dipendente` FK NOT NULL |
-| dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
-| manutenzione | `id_auto` FK NOT NULL |
-
-### 2.7 Script di creazione delle tabelle
+### 2.3 Script di creazione delle tabelle
 
 ```sql
 CREATE DATABASE concessionaria_auto;
