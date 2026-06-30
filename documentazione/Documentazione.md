@@ -34,7 +34,6 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
    - 2.3 Script di creazione delle tabelle
 3. Implementazione del sistema informativo
 4. Istruzioni per installazione e avvio
-5. Bonus
 
 ---
 
@@ -363,63 +362,14 @@ CREATE TABLE manutenzione (
 
 ## 3. Implementazione del sistema informativo
 
-### 3.1 Stack tecnologico
-
-Il sistema è implementato con **Django 6.0** (backend e template engine) e **Bootstrap 5** (CSS via CDN). Non viene usato JavaScript custom: l'unico JS presente è il bundle di Bootstrap, necessario per il menu responsive su mobile. Il database è SQLite, scelto per semplicità di installazione e portabilità del progetto didattico.
-
-### 3.2 Struttura del progetto
-
-```
-progetto_concessionaria_parziale/   ← root del repository (clonare qui)
-├── .gitignore
-├── requirements.txt
-├── manage.py                       ← punto di ingresso Django
-├── dati_esempio.json               ← dump con dati di esempio
-├── venv/                           ← virtual environment (escluso da git)
-├── concessionaria_project/         ← configurazione Django
-│   ├── settings.py
-│   └── urls.py
-├── gestionale/                     ← unica app Django
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   ├── urls.py
-│   ├── admin.py
-│   ├── management/commands/popola_db.py
-│   ├── migrations/
-│   └── templates/
-│       ├── gestionale/             ← template dell'app
-│       └── registration/           ← override template login Django
-└── documentazione/
-    ├── Documentazione.md
-    ├── schema_logico.sql
-    └── immagini/er_completo.png
-```
-
 ### 3.3 Funzionalità implementate
 
-**Funzionalità 1 — Registrazione e login**
+Il sistema è sviluppato con **Django 6.0** e **Bootstrap 5** (CSS via CDN, nessun JavaScript custom). Il database è SQLite. Sono state implementate quattro funzionalità principali:
 
-La registrazione distingue due percorsi separati: `/registrazione/privato/` per i clienti privati (richiede nome, cognome, codice fiscale) e `/registrazione/azienda/` per le aziende (richiede ragione sociale, partita IVA). Entrambi i form estendono `UserCreationForm` di Django e, al salvataggio, creano atomicamente tre oggetti: `User` (autenticazione), `Cliente` (dati comuni), `Privato` o `Azienda` (dati specifici della specializzazione). Il login usa direttamente la view built-in di Django (`django.contrib.auth.urls`), con template personalizzato. Il logout avviene tramite POST, come richiesto da Django 5+.
-
-**Funzionalità 2 — Ricerca auto**
-
-La pagina `/auto/` mostra tutte le auto disponibili e permette di filtrarle per marca (ricerca testuale parziale, case-insensitive), modello, prezzo minimo e prezzo massimo. I filtri sono combinabili. Ogni risultato ha un link alla scheda di dettaglio (`/auto/<id>/`) che mostra tutti gli attributi del veicolo, il fornitore, lo stato e un collegamento diretto allo storico manutenzioni.
-
-**Funzionalità 3 — Storico vendite del cliente loggato**
-
-La pagina `/le-mie-vendite/` è protetta con `@login_required`: se l'utente non è autenticato viene rediretto al login. Mostra tutte le vendite associate al cliente corrente, con il dettaglio di ogni auto acquistata, quantità, prezzo unitario, subtotale e totale della transazione.
-
-**Funzionalità 4 — Storico manutenzioni di un'auto**
-
-La pagina `/manutenzioni/` presenta un menu a tendina con tutte le auto del parco. Selezionando un veicolo e confermando con un GET, la pagina mostra la tabella degli interventi di manutenzione registrati per quell'auto (data, descrizione, costo). Il link "Storico manutenzioni" nella scheda dettaglio auto precompila automaticamente la selezione.
-
-### 3.4 Scelte implementative notevoli
-
-- **Generalizzazione nel codice**: la view di registrazione crea sempre sia il record `Cliente` sia il record `Privato`/`Azienda` nella stessa transazione, garantendo il vincolo di totalità descritto nella sezione 2.5.
-- **Protezione CSRF**: tutti i form POST usano `{% csrf_token %}`. Il logout è implementato come form POST (non link GET) per rispettare la protezione CSRF e il requisito di Django 6.
-- **ORM e query efficienti**: le view usano `select_related` e `prefetch_related` per evitare il problema N+1 nelle pagine che attraversano relazioni (es. storico vendite con dettagli e auto).
-- **Validazione**: i form verificano unicità di email, codice fiscale e partita IVA prima del salvataggio, restituendo errori inline nel form.
+- **Registrazione e login** — percorsi distinti per privati (`/registrazione/privato/`) e aziende (`/registrazione/azienda/`). Ogni form crea in un'unica operazione l'utente Django, il record `Cliente` e il record `Privato` o `Azienda`. Il logout avviene tramite POST.
+- **Ricerca auto** — la pagina `/auto/` permette di filtrare il catalogo per marca, modello, prezzo minimo e prezzo massimo. Ogni veicolo ha una scheda di dettaglio con tutti gli attributi.
+- **Storico vendite** — la pagina `/le-mie-vendite/` è accessibile solo agli utenti autenticati e mostra tutte le vendite del cliente loggato con il dettaglio delle auto acquistate.
+- **Storico manutenzioni** — la pagina `/manutenzioni/` mostra gli interventi registrati per un'auto selezionata da un menu a tendina.
 
 ---
 
@@ -490,8 +440,3 @@ Dopo `loaddata dati_esempio.json` sono disponibili questi account:
 | `flotta_srl` | `Password123!` | Azienda |
 | `tecno_auto` | `Password123!` | Azienda |
 
----
-
-## 5. Bonus
-
-*Non realizzato.*
