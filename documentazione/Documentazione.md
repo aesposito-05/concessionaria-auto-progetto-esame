@@ -363,12 +363,11 @@ CREATE TABLE manutenzione (
 
 ### 3.3 Funzionalità implementate
 
-Il sistema è sviluppato con **Django 6.0** e **Bootstrap 5** (CSS via CDN, nessun JavaScript custom). Il database è SQLite. Sono state implementate quattro funzionalità principali:
+Il sistema è sviluppato con **Django 6.0** e **Bootstrap 5** (CSS via CDN, nessun JavaScript custom). Il database è SQLite. Sono state implementate tre funzionalità principali:
 
-- **Registrazione e login** — percorsi distinti per privati (`/registrazione/privato/`) e aziende (`/registrazione/azienda/`). Ogni form crea in un'unica operazione l'utente Django, il record `Cliente` e il record `Privato` o `Azienda`. Il logout avviene tramite POST.
-- **Ricerca auto** — la pagina `/auto/` permette di filtrare il catalogo per marca, modello, prezzo minimo e prezzo massimo. Ogni veicolo ha una scheda di dettaglio con tutti gli attributi.
-- **Storico vendite** — la pagina `/le-mie-vendite/` è accessibile solo agli utenti autenticati e mostra tutte le vendite del cliente loggato con il dettaglio delle auto acquistate.
-- **Storico manutenzioni** — la pagina `/manutenzioni/` mostra gli interventi registrati per un'auto selezionata da un menu a tendina.
+- **Home page** — la pagina `/` mostra il numero totale di auto attualmente disponibili nel catalogo, interrogando il database in tempo reale.
+- **Catalogo auto** — la pagina `/auto/` elenca tutte le auto con stato "disponibile", mostrando per ciascuna marca e modello.
+- **Dettaglio auto** — la pagina `/auto/<id>/` mostra la scheda completa di un singolo veicolo: modello, marca, fornitore, prezzo, anno e stato. Se l'ID non esiste viene restituito automaticamente un errore HTTP 404.
 
 ---
 
@@ -397,19 +396,11 @@ source venv/bin/activate
 # 3. Installa le dipendenze
 pip install -r requirements.txt
 
-# 4. Esegui le migrazioni
-python manage.py migrate
-
-# 5. Carica i dati di esempio
-python manage.py loaddata dati_esempio.json
-
-# 6. Avvia il server di sviluppo
+# 4. Avvia il server di sviluppo
 python manage.py runserver
 ```
 
-> **Nota per lo sviluppo**: `python manage.py popola_db` è un comando alternativo
-> che rigenera i dati di esempio da zero (utile se si vuole ripartire da un
-> database vuoto senza usare il dump).
+> **Nota**: il file `db.sqlite3` è incluso nel repository e contiene già i dati di esempio. Non è necessario eseguire migrazioni né caricare dati separatamente.
 
 ### Accesso
 
@@ -417,25 +408,12 @@ Dopo l'avvio, il sistema è raggiungibile all'indirizzo: **http://127.0.0.1:8000
 
 | URL | Descrizione |
 |---|---|
-| `/` | Home page |
-| `/auto/` | Catalogo e ricerca veicoli |
+| `/` | Home page con contatore auto disponibili |
+| `/auto/` | Catalogo veicoli disponibili |
 | `/auto/<id>/` | Scheda dettaglio veicolo |
-| `/manutenzioni/` | Storico manutenzioni |
-| `/le-mie-vendite/` | Storico acquisti (richiede login) |
-| `/registrazione/` | Scelta tipo di registrazione |
-| `/accounts/login/` | Login |
 | `/admin/` | Area amministrativa Django |
 
-### Credenziali dati di esempio
+### Credenziali area amministrativa
 
-Dopo `loaddata dati_esempio.json` sono disponibili questi account:
-
-| Username | Password | Tipo |
-|---|---|---|
-| `admin` | `Admin123!` | Amministratore (area `/admin/`) |
-| `mario_rossi` | `Password123!` | Cliente privato |
-| `anna_verdi` | `Password123!` | Cliente privato |
-| `luca_neri` | `Password123!` | Cliente privato |
-| `flotta_srl` | `Password123!` | Azienda |
-| `tecno_auto` | `Password123!` | Azienda |
+Per accedere al pannello `/admin/` usare le credenziali dell'account amministratore creato in fase di setup con `python manage.py createsuperuser`.
 
