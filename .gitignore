@@ -24,3 +24,4 @@ crea_admin.py
 # Coverage e test
 .coverage
 htmlcov/
+.claude/
