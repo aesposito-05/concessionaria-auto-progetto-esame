@@ -5,7 +5,7 @@
 {% block content %}
 <nav aria-label="breadcrumb" class="mb-3">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'ricerca_auto' %}">Catalogo</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'lista_auto' %}">Catalogo</a></li>
     <li class="breadcrumb-item active">{{ auto }}</li>
   </ol>
 </nav>
@@ -56,14 +56,9 @@
       </tbody>
     </table>
 
-    <div class="d-flex gap-2 mt-2">
-      <a href="{% url 'storico_manutenzioni' %}?auto={{ auto.pk }}" class="btn btn-outline-dark btn-sm">
-        Storico manutenzioni
-      </a>
-      <a href="{% url 'ricerca_auto' %}" class="btn btn-outline-secondary btn-sm">
-        Torna al catalogo
-      </a>
-    </div>
+    <a href="{% url 'lista_auto' %}" class="btn btn-outline-secondary btn-sm">
+      Torna al catalogo
+    </a>
   </div>
 </div>
 {% endblock %}

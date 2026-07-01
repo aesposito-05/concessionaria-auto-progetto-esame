@@ -6,61 +6,12 @@
 <div class="px-4 py-5 text-center">
   <h1 class="display-5 fw-bold">Benvenuto in Concessionaria Auto</h1>
   <p class="lead col-lg-6 mx-auto text-muted">
-    Trova l'auto dei tuoi sogni tra i veicoli disponibili, consulta lo storico
-    delle manutenzioni o accedi al tuo profilo per vedere i tuoi acquisti.
+    Trova l'auto dei tuoi sogni tra i <strong>{{ totale_auto }}</strong> veicoli attualmente disponibili.
   </p>
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-    <a href="{% url 'ricerca_auto' %}" class="btn btn-dark btn-lg px-4">
+  <div class="mt-4">
+    <a href="{% url 'lista_auto' %}" class="btn btn-dark btn-lg px-4">
       Sfoglia il catalogo
     </a>
-    {% if not user.is_authenticated %}
-    <a href="{% url 'registrazione_scelta' %}" class="btn btn-outline-secondary btn-lg px-4">
-      Registrati
-    </a>
-    {% endif %}
-  </div>
-</div>
-
-<div class="row g-4 py-4">
-  <div class="col-md-4">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Catalogo veicoli</h5>
-        <p class="card-text text-muted">
-          Cerca tra le auto disponibili filtrando per marca, modello e prezzo.
-          Attualmente <strong>{{ totale_auto }}</strong> veicoli disponibili.
-        </p>
-        <a href="{% url 'ricerca_auto' %}" class="btn btn-sm btn-outline-dark">Vai al catalogo</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Storico manutenzioni</h5>
-        <p class="card-text text-muted">
-          Consulta la cronologia degli interventi tecnici per qualsiasi veicolo
-          nel nostro parco auto.
-        </p>
-        <a href="{% url 'storico_manutenzioni' %}" class="btn btn-sm btn-outline-dark">Consulta</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">I miei acquisti</h5>
-        <p class="card-text text-muted">
-          Accedi al tuo profilo per visualizzare lo storico completo dei tuoi
-          acquisti e le relative fatture.
-        </p>
-        {% if user.is_authenticated %}
-        <a href="{% url 'storico_vendite' %}" class="btn btn-sm btn-outline-dark">Vai agli acquisti</a>
-        {% else %}
-        <a href="{% url 'login' %}" class="btn btn-sm btn-outline-dark">Accedi</a>
-        {% endif %}
-      </div>
-    </div>
   </div>
 </div>
 {% endblock %}
