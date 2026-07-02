@@ -91,7 +91,7 @@ class Privato(models.Model):
     """Specializzazione di Cliente per le persone fisiche."""
 
     cliente = models.OneToOneField(
-        Cliente, on_delete=models.CASCADE, primary_key=True, related_name='privato'
+        Cliente, on_delete=models.CASCADE, related_name='privato'
     )
     codice_fiscale = models.CharField(max_length=16, unique=True)
     nome = models.CharField(max_length=50)
@@ -106,7 +106,7 @@ class Azienda(models.Model):
     """Specializzazione di Cliente per le persone giuridiche."""
 
     cliente = models.OneToOneField(
-        Cliente, on_delete=models.CASCADE, primary_key=True, related_name='azienda'
+        Cliente, on_delete=models.CASCADE, related_name='azienda'
     )
     partita_iva = models.CharField(max_length=11, unique=True)
     ragione_sociale = models.CharField(max_length=100)

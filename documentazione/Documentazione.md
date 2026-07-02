@@ -134,8 +134,8 @@ Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dic
 | Tabella | Vincolo |
 |---|---|
 | cliente | `email` UNIQUE NOT NULL; `tipo_cliente` CHECK IN (privato, azienda) |
-| privato | `id_cliente` PK/FK verso cliente; `codice_fiscale` UNIQUE NOT NULL |
-| azienda | `id_cliente` PK/FK verso cliente; `partita_iva` UNIQUE NOT NULL |
+| privato | `id_privato` PK; `id_cliente` FK UNIQUE NOT NULL verso cliente; `codice_fiscale` UNIQUE NOT NULL |
+| azienda | `id_azienda` PK; `id_cliente` FK UNIQUE NOT NULL verso cliente; `partita_iva` UNIQUE NOT NULL |
 | auto | `prezzo` CHECK (> 0); `stato` CHECK IN (disponibile, venduta, manutenzione); `id_marca`/`id_fornitore` FK NOT NULL |
 | vendita | `id_cliente`/`id_dipendente` FK NOT NULL |
 | dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
@@ -198,7 +198,8 @@ CLIENTE(
 **PRIVATO**
 ```
 PRIVATO(
-  id_cliente PK/FK,
+  id_privato PK,
+  id_cliente FK,
   codice_fiscale,
   nome,
   cognome,
@@ -209,7 +210,8 @@ PRIVATO(
 **AZIENDA**
 ```
 AZIENDA(
-  id_cliente PK/FK,
+  id_azienda PK,
+  id_cliente FK,
   partita_iva,
   ragione_sociale,
   settore
@@ -259,7 +261,7 @@ MANUTENZIONE(
 )
 ```
 
-*Nota: in `PRIVATO`, `AZIENDA` e `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella — è proprio la tecnica usata per realizzare la generalizzazione (paragrafo 1.7) e la tabella ponte N:M (paragrafo 2.1).*
+*Nota: in `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella. In `PRIVATO` e `AZIENDA` invece ogni tabella ha una propria chiave primaria autonoma (`id_privato`, `id_azienda`) e una chiave esterna `id_cliente` con vincolo UNIQUE verso `CLIENTE`, realizzando così la relazione 1:1 di specializzazione.*
 
 ### 2.3 Script di creazione delle tabelle
 
@@ -302,7 +304,8 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE privato (
-  id_cliente INT PRIMARY KEY,
+  id_privato INT PRIMARY KEY AUTO_INCREMENT,
+  id_cliente INT UNIQUE NOT NULL,
   codice_fiscale VARCHAR(16) UNIQUE NOT NULL,
   nome VARCHAR(50) NOT NULL,
   cognome VARCHAR(50) NOT NULL,
@@ -311,7 +314,8 @@ CREATE TABLE privato (
 );
 
 CREATE TABLE azienda (
-  id_cliente INT PRIMARY KEY,
+  id_azienda INT PRIMARY KEY AUTO_INCREMENT,
+  id_cliente INT UNIQUE NOT NULL,
   partita_iva VARCHAR(11) UNIQUE NOT NULL,
   ragione_sociale VARCHAR(100) NOT NULL,
   settore VARCHAR(50),
