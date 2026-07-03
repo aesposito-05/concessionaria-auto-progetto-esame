@@ -205,20 +205,4 @@
   <ellipse cx="785" cy="681" rx="52" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
   <text x="785" y="685" text-anchor="middle" fill="#333" font-size="10">prezzo_unitario</text>
 
-  <!-- ══════ LEGENDA ══════ -->
-  <rect x="30" y="700" width="480" height="90" rx="5" fill="#f8f9fa" stroke="#aaa" stroke-width="1"/>
-  <text x="270" y="718" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Legenda</text>
-  <text x="46" y="736" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="66" y="736" fill="#555" font-size="11">= Chiave Primaria</text>
-  <text x="200" y="736" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="220" y="736" fill="#555" font-size="11">= Chiave Esterna</text>
-  <text x="46" y="752" fill="#c0392b" font-size="11" font-weight="bold">PK/FK</text><text x="80" y="752" fill="#555" font-size="11">= PK che è anche FK (specializzazione OneToOne)</text>
-  <text x="46" y="770" fill="#555" font-size="11">(min,max) = cardinalità minima e massima della relazione</text>
-  <text x="46" y="784" fill="#555" font-size="11">Relazione "appartiene": CLIENTE(0,1) — PRIVATO/AZIENDA(1,1)</text>
-
-  <!-- ══════ NOTE CARDINALITÀ ══════ -->
-  <rect x="530" y="700" width="740" height="90" rx="5" fill="#e8f5e9" stroke="#27ae60" stroke-width="1"/>
-  <text x="900" y="718" text-anchor="middle" fill="#1b5e20" font-size="11" font-weight="bold">Cardinalità delle relazioni</text>
-  <text x="546" y="734" fill="#2e7d32" font-size="11">MARCA(0,N) produce AUTO(1,1) — una marca può avere 0+ auto; ogni auto ha esattamente 1 marca</text>
-  <text x="546" y="750" fill="#2e7d32" font-size="11">FORNITORE(0,N) fornisce AUTO(1,1) — ogni auto ha esattamente 1 fornitore</text>
-  <text x="546" y="766" fill="#2e7d32" font-size="11">AUTO(0,N) richiede MANUTENZIONE(1,1) — CLIENTE(0,N) effettua VENDITA(1,1) — DIPENDENTE(0,N) gestisce VENDITA(1,1)</text>
-  <text x="546" y="782" fill="#2e7d32" font-size="11">AUTO(0,N) — DETTAGLIO_VENDITA (N:M) — VENDITA(1,N): ogni vendita ha almeno 1 auto; ogni auto può essere in 0+ vendite</text>
 </svg>
