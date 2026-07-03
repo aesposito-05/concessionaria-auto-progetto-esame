@@ -43,12 +43,12 @@
   <text x="1008" y="272" fill="#555" font-size="10">(1,1)</text>
 
   <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
-  <line x1="880" y1="410" x2="730" y2="590" stroke="#555" stroke-width="1.5"/>
-  <text x="865" y="425" fill="#555" font-size="10">(1,N)</text>
+  <line x1="880" y1="465" x2="730" y2="590" stroke="#555" stroke-width="1.5"/>
+  <text x="890" y="483" fill="#555" font-size="10">(1,N)</text>
 
   <!-- AUTO ─── DETTAGLIO_VENDITA (N:M)  (0,N) -->
-  <line x1="360" y1="280" x2="592" y2="590" stroke="#555" stroke-width="1.5"/>
-  <text x="366" y="308" fill="#555" font-size="10">(0,N)</text>
+  <line x1="360" y1="330" x2="592" y2="590" stroke="#555" stroke-width="1.5"/>
+  <text x="385" y="350" fill="#555" font-size="10">(0,N)</text>
 
   <!-- ══════════════════════════════════════════
        TABELLE
