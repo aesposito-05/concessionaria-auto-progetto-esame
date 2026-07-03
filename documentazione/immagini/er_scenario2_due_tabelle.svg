@@ -206,10 +206,5 @@
   <ellipse cx="784" cy="658" rx="52" ry="14" fill="#fafafa" stroke="#888" stroke-width="1"/>
   <text x="784" y="662" text-anchor="middle" fill="#333" font-size="10">prezzo_unitario</text>
 
-  <!-- ══════ PROBLEMA ══════ -->
-  <rect x="30" y="698" width="1190" height="68" rx="5" fill="#fdecea" stroke="#e74c3c" stroke-width="1.5"/>
-  <text x="625" y="718" text-anchor="middle" fill="#c0392b" font-size="12" font-weight="bold">Problema: attributi comuni (email, telefono, citta) duplicati in entrambe le tabelle</text>
-  <text x="625" y="736" text-anchor="middle" fill="#c0392b" font-size="12">Nessun posto unico dove cercare un cliente generico: query per email richiede UNION su PRIVATO e AZIENDA.</text>
-  <text x="625" y="754" text-anchor="middle" fill="#c0392b" font-size="12">VENDITA deve avere due FK separate (id_privato, id_azienda): una delle due sarà sempre NULL. Logica applicativa complessa.</text>
 
 </svg>
