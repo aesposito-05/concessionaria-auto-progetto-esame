@@ -27,6 +27,7 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
    - 1.7 Derivazione della generalizzazione
    - 1.8 Semplificazioni e adattamenti
    - 1.9 Vincoli principali
+   - 1.10 Vincoli interrelazionali
 2. Progettazione logica
    - 2.1 Regole di derivazione
    - 2.2 Elenco delle entità e degli attributi
@@ -141,6 +142,17 @@ Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dic
 | vendita | `id_cliente`/`id_dipendente` FK NOT NULL |
 | dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
 | manutenzione | `id_auto` FK NOT NULL |
+
+### 1.10 Vincoli interrelazionali
+
+I vincoli interrelazionali coinvolgono più tabelle contemporaneamente e non possono essere espressi con un semplice CHECK su una singola colonna. Richiederebbero trigger o logica applicativa per essere imposti a livello di database.
+
+| Vincolo | Tabelle coinvolte | Descrizione |
+|---|---|---|
+| Specializzazione totale ed esclusiva | CLIENTE, PRIVATO, AZIENDA | Ogni riga di CLIENTE deve avere esattamente una riga corrispondente in PRIVATO oppure in AZIENDA, mai in entrambe e mai in nessuna delle due |
+| Coerenza stato auto | AUTO, DETTAGLIO_VENDITA | Un'auto con stato "venduta" deve avere almeno una riga in DETTAGLIO_VENDITA; un'auto non può risultare venduta se non compare in nessuna vendita |
+| Coerenza importo vendita | VENDITA, DETTAGLIO_VENDITA | Il campo `importo_totale` in VENDITA deve essere uguale alla somma di `quantita * prezzo_unitario` di tutte le righe di DETTAGLIO_VENDITA associate a quella vendita |
+| Coerenza stato manutenzione | AUTO, MANUTENZIONE | Un'auto con stato "manutenzione" deve avere almeno una riga in MANUTENZIONE; un'auto non può essere marcata in manutenzione senza un intervento registrato |
 
 ---
 
