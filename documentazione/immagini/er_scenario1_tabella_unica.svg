@@ -1,6 +1,6 @@
 <svg viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
   <rect width="1200" height="780" fill="white"/>
-  <text x="600" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Scenario 1 — Tabella unica CLIENTE (problema: valori NULL)</text>
+  <text x="600" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Scenario 1 — Tabella unica CLIENTE</text>
 
   <!-- ══════════════════════════════════════════
        LINEE / RELAZIONI
@@ -80,8 +80,8 @@
   <text x="244" y="282" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="262" y="282" fill="#e74c3c" font-size="11">id_marca</text>
   <text x="244" y="298" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="262" y="298" fill="#e74c3c" font-size="11">id_fornitore</text>
 
-  <!-- CLIENTE (unica, grande, con NULL) -->
-  <rect x="450" y="70" width="195" height="340" rx="5" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
+  <!-- CLIENTE (unica) -->
+  <rect x="450" y="70" width="195" height="280" rx="5" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
   <rect x="450" y="70" width="195" height="22" rx="5" fill="#e74c3c"/>
   <rect x="450" y="86" width="195" height="6" fill="#e74c3c"/>
   <text x="547" y="85" text-anchor="middle" fill="white" font-weight="bold" font-size="12">CLIENTE</text>
@@ -90,19 +90,15 @@
   <text x="464" y="138" fill="#555" font-size="11">   telefono</text>
   <text x="464" y="154" fill="#555" font-size="11">   citta</text>
   <text x="464" y="170" fill="#555" font-size="11">   tipo_cliente</text>
-  <line x1="456" y1="178" x2="639" y2="178" stroke="#e74c3c" stroke-dasharray="4,3" stroke-width="1"/>
-  <text x="464" y="194" fill="#e67e22" font-size="10" font-style="italic">— solo Privato (NULL se azienda) —</text>
-  <text x="464" y="210" fill="#888" font-size="11">   codice_fiscale</text>
-  <text x="464" y="226" fill="#888" font-size="11">   nome</text>
-  <text x="464" y="242" fill="#888" font-size="11">   cognome</text>
-  <text x="464" y="258" fill="#888" font-size="11">   data_nascita</text>
-  <line x1="456" y1="266" x2="639" y2="266" stroke="#e74c3c" stroke-dasharray="4,3" stroke-width="1"/>
-  <text x="464" y="282" fill="#e67e22" font-size="10" font-style="italic">— solo Azienda (NULL se privato) —</text>
-  <text x="464" y="298" fill="#888" font-size="11">   partita_iva</text>
-  <text x="464" y="314" fill="#888" font-size="11">   ragione_sociale</text>
-  <text x="464" y="330" fill="#888" font-size="11">   settore</text>
-  <text x="464" y="350" fill="#e74c3c" font-size="10" font-weight="bold">⚠ metà campi sempre NULL</text>
-  <text x="464" y="366" fill="#e74c3c" font-size="10">NOT NULL non applicabile ai campi specifici</text>
+  <line x1="456" y1="178" x2="639" y2="178" stroke="#aaa" stroke-dasharray="4,3" stroke-width="1"/>
+  <text x="464" y="194" fill="#888" font-size="11">   codice_fiscale</text>
+  <text x="464" y="210" fill="#888" font-size="11">   nome</text>
+  <text x="464" y="226" fill="#888" font-size="11">   cognome</text>
+  <text x="464" y="242" fill="#888" font-size="11">   data_nascita</text>
+  <line x1="456" y1="250" x2="639" y2="250" stroke="#aaa" stroke-dasharray="4,3" stroke-width="1"/>
+  <text x="464" y="266" fill="#888" font-size="11">   partita_iva</text>
+  <text x="464" y="282" fill="#888" font-size="11">   ragione_sociale</text>
+  <text x="464" y="298" fill="#888" font-size="11">   settore</text>
 
   <!-- DIPENDENTE -->
   <rect x="860" y="75" width="150" height="120" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>

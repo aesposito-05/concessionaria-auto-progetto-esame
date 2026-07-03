@@ -24,17 +24,17 @@
   <line x1="303" y1="419" x2="300" y2="475" stroke="#555" stroke-width="1.5"/>
   <text x="307" y="471" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- ── effettua? PRIVATO → rombo → VENDITA (dashed red) ── -->
+  <!-- ── effettua PRIVATO → rombo → VENDITA (dashed red) ── -->
   <line x1="560" y1="175" x2="658" y2="241" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="565" y="168" fill="#e74c3c" font-size="10">(0,N) ⚠</text>
+  <text x="565" y="168" fill="#555" font-size="10">(0,N)</text>
   <line x1="722" y1="255" x2="820" y2="315" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="795" y="313" fill="#e74c3c" font-size="10">(1,1) ⚠</text>
+  <text x="795" y="313" fill="#555" font-size="10">(1,1)</text>
 
-  <!-- ── effettua? AZIENDA → rombo → VENDITA (dashed red) ── -->
+  <!-- ── effettua AZIENDA → rombo → VENDITA (dashed red) ── -->
   <line x1="795" y1="175" x2="800" y2="250" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="797" y="162" fill="#e74c3c" font-size="10">(0,N) ⚠</text>
+  <text x="797" y="162" fill="#555" font-size="10">(0,N)</text>
   <line x1="830" y1="260" x2="830" y2="275" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="832" y="273" fill="#e74c3c" font-size="10">(1,1) ⚠</text>
+  <text x="832" y="273" fill="#555" font-size="10">(1,1)</text>
 
   <!-- ── gestisce: DIPENDENTE → rombo → VENDITA ── -->
   <line x1="1017" y1="180" x2="1015" y2="218" stroke="#555" stroke-width="1.5"/>
@@ -86,47 +86,34 @@
   <text x="244" y="282" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="262" y="282" fill="#e74c3c" font-size="11">id_marca</text>
   <text x="244" y="298" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="262" y="298" fill="#e74c3c" font-size="11">id_fornitore</text>
 
-  <!-- PRIVATO (con attributi duplicati evidenziati) -->
-  <rect x="390" y="60" width="175" height="220" rx="5" fill="#eaf4fb" stroke="#3498db" stroke-width="2"/>
+  <!-- PRIVATO -->
+  <rect x="390" y="60" width="175" height="175" rx="5" fill="#eaf4fb" stroke="#3498db" stroke-width="2"/>
   <rect x="390" y="60" width="175" height="22" rx="5" fill="#3498db"/>
   <rect x="390" y="76" width="175" height="6" fill="#3498db"/>
   <text x="477" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="12">PRIVATO</text>
   <text x="404" y="96" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="422" y="96" fill="#333" font-size="11">id_cliente</text>
-  <!-- attributi duplicati in giallo -->
-  <rect x="400" y="101" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="404" y="113" fill="#856404" font-size="11">   email ⚠ duplicato</text>
-  <rect x="400" y="117" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="404" y="129" fill="#856404" font-size="11">   telefono ⚠ duplicato</text>
-  <rect x="400" y="133" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="404" y="145" fill="#856404" font-size="11">   citta ⚠ duplicato</text>
+  <text x="404" y="112" fill="#555" font-size="11">   email</text>
+  <text x="404" y="128" fill="#555" font-size="11">   telefono</text>
+  <text x="404" y="144" fill="#555" font-size="11">   citta</text>
   <line x1="396" y1="152" x2="559" y2="152" stroke="#aaa" stroke-dasharray="3,3" stroke-width="1"/>
   <text x="404" y="168" fill="#333" font-size="11">   codice_fiscale</text>
   <text x="404" y="184" fill="#333" font-size="11">   nome</text>
   <text x="404" y="200" fill="#333" font-size="11">   cognome</text>
   <text x="404" y="216" fill="#333" font-size="11">   data_nascita</text>
-  <text x="404" y="236" fill="#e74c3c" font-size="10" font-weight="bold">⚠ nessun padre comune</text>
-  <text x="404" y="252" fill="#e74c3c" font-size="10">id_cliente ≠ id_cliente AZIENDA</text>
-  <text x="404" y="268" fill="#e74c3c" font-size="10">rischio conflitti tra ID</text>
 
-  <!-- AZIENDA (con attributi duplicati evidenziati) -->
-  <rect x="620" y="60" width="175" height="205" rx="5" fill="#fef5ec" stroke="#e67e22" stroke-width="2"/>
+  <!-- AZIENDA -->
+  <rect x="620" y="60" width="175" height="160" rx="5" fill="#fef5ec" stroke="#e67e22" stroke-width="2"/>
   <rect x="620" y="60" width="175" height="22" rx="5" fill="#e67e22"/>
   <rect x="620" y="76" width="175" height="6" fill="#e67e22"/>
   <text x="707" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="12">AZIENDA</text>
   <text x="634" y="96" fill="#c0392b" font-size="11" font-weight="bold">PK</text><text x="652" y="96" fill="#333" font-size="11">id_cliente</text>
-  <rect x="630" y="101" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="634" y="113" fill="#856404" font-size="11">   email ⚠ duplicato</text>
-  <rect x="630" y="117" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="634" y="129" fill="#856404" font-size="11">   telefono ⚠ duplicato</text>
-  <rect x="630" y="133" width="157" height="15" rx="2" fill="#fff3cd"/>
-  <text x="634" y="145" fill="#856404" font-size="11">   citta ⚠ duplicato</text>
+  <text x="634" y="112" fill="#555" font-size="11">   email</text>
+  <text x="634" y="128" fill="#555" font-size="11">   telefono</text>
+  <text x="634" y="144" fill="#555" font-size="11">   citta</text>
   <line x1="626" y1="152" x2="789" y2="152" stroke="#aaa" stroke-dasharray="3,3" stroke-width="1"/>
   <text x="634" y="168" fill="#333" font-size="11">   partita_iva</text>
   <text x="634" y="184" fill="#333" font-size="11">   ragione_sociale</text>
   <text x="634" y="200" fill="#333" font-size="11">   settore</text>
-  <text x="634" y="220" fill="#e74c3c" font-size="10" font-weight="bold">⚠ nessun padre comune</text>
-  <text x="634" y="236" fill="#e74c3c" font-size="10">ricerca clienti per email:</text>
-  <text x="634" y="252" fill="#e74c3c" font-size="10">JOIN su due tabelle separate</text>
 
   <!-- DIPENDENTE -->
   <rect x="940" y="75" width="155" height="105" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
@@ -139,8 +126,8 @@
   <text x="954" y="158" fill="#555" font-size="11">   ruolo</text>
   <text x="954" y="174" fill="#555" font-size="11">   stipendio</text>
 
-  <!-- VENDITA (con due FK separate problematiche) -->
-  <rect x="820" y="275" width="190" height="190" rx="5" fill="#fdecea" stroke="#e74c3c" stroke-width="2"/>
+  <!-- VENDITA -->
+  <rect x="820" y="275" width="190" height="140" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
   <rect x="820" y="275" width="190" height="22" rx="5" fill="#343a40"/>
   <rect x="820" y="291" width="190" height="6" fill="#343a40"/>
   <text x="915" y="290" text-anchor="middle" fill="white" font-weight="bold" font-size="12">VENDITA</text>
@@ -149,11 +136,8 @@
   <text x="834" y="342" fill="#555" font-size="11">   importo_totale</text>
   <line x1="826" y1="350" x2="1004" y2="350" stroke="#ddd" stroke-width="1"/>
   <text x="834" y="366" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="852" y="366" fill="#e74c3c" font-size="11">id_dipendente</text>
-  <text x="834" y="386" fill="#e74c3c" font-size="11" font-weight="bold">FK?</text><text x="858" y="386" fill="#e74c3c" font-size="11">id_privato ⚠</text>
-  <text x="834" y="402" fill="#e74c3c" font-size="11" font-weight="bold">FK?</text><text x="858" y="402" fill="#e74c3c" font-size="11">id_azienda ⚠</text>
-  <text x="834" y="422" fill="#c0392b" font-size="10" font-weight="bold">Due FK separate: problema!</text>
-  <text x="834" y="438" fill="#c0392b" font-size="10">Solo una può essere NOT NULL</text>
-  <text x="834" y="454" fill="#c0392b" font-size="10">per ogni riga → logica complessa</text>
+  <text x="834" y="382" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="852" y="382" fill="#e74c3c" font-size="11">id_privato</text>
+  <text x="834" y="398" fill="#e74c3c" font-size="11" font-weight="bold">FK</text><text x="852" y="398" fill="#e74c3c" font-size="11">id_azienda</text>
 
   <!-- MANUTENZIONE -->
   <rect x="225" y="475" width="155" height="120" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1.5"/>
@@ -183,11 +167,11 @@
   <polygon points="303,391 338,405 303,419 268,405" fill="#f0f4ff" stroke="#555" stroke-width="1.5"/>
   <text x="303" y="409" text-anchor="middle" fill="#333" font-size="9" font-style="italic">richiede</text>
 
-  <!-- effettua? (PRIVATO – VENDITA, problema) -->
+  <!-- effettua (PRIVATO – VENDITA, problema) -->
   <polygon points="690,241 722,255 690,269 658,255" fill="#fdecea" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="690" y="259" text-anchor="middle" fill="#c0392b" font-size="9" font-style="italic">effettua?</text>
+  <text x="690" y="259" text-anchor="middle" fill="#c0392b" font-size="9" font-style="italic">effettua</text>
 
-  <!-- effettua? (AZIENDA – VENDITA, problema) -->
+  <!-- effettua (AZIENDA – VENDITA, problema) -->
   <polygon points="815,250 830,260 815,270 800,260" fill="#fdecea" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
   <text x="815" y="264" text-anchor="middle" fill="#c0392b" font-size="8" font-style="italic">eff.?</text>
 
