@@ -31,6 +31,7 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
    - 2.1 Regole di derivazione
    - 2.2 Elenco delle entità e degli attributi
    - 2.3 Script di creazione delle tabelle
+   - 2.4 Trigger
 3. Implementazione del sistema informativo
 4. Istruzioni per installazione e avvio
 
@@ -360,6 +361,41 @@ CREATE TABLE manutenzione (
   FOREIGN KEY (id_auto) REFERENCES auto(id_auto)
 );
 ```
+
+### 2.4 Trigger
+
+I trigger seguenti non sono implementati nel codice Django (che gestisce la logica applicativa tramite i modelli), ma vengono riportati a titolo esemplificativo per mostrare come i vincoli e le regole di business potrebbero essere imposti direttamente a livello di database.
+
+**Trigger 1 — Aggiorna lo stato dell'auto a "venduta" dopo una vendita**
+
+```sql
+CREATE TRIGGER aggiorna_stato_auto
+AFTER INSERT ON dettaglio_vendita
+FOR EACH ROW
+BEGIN
+    UPDATE auto
+    SET stato = 'venduta'
+    WHERE id_auto = NEW.id_auto;
+END;
+```
+
+Ogni volta che un'auto viene inserita in `dettaglio_vendita` (cioè entra in una vendita), il suo stato viene automaticamente aggiornato a `venduta`. Si tratta di un trigger che mantiene la coerenza dei dati tra due tabelle correlate.
+
+**Trigger 2 — Vincolo interrelazionale sulla specializzazione Cliente**
+
+```sql
+CREATE TRIGGER controlla_specializzazione
+AFTER INSERT ON cliente
+FOR EACH ROW
+BEGIN
+    IF NEW.tipo_cliente NOT IN ('privato', 'azienda') THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'tipo_cliente deve essere privato o azienda';
+    END IF;
+END;
+```
+
+Dopo ogni inserimento in `cliente`, verifica che il campo `tipo_cliente` sia valido. Questo trigger implementa il vincolo interrelazionale di totalità ed esclusività della specializzazione descritto nella sezione 1.8: ogni cliente deve appartenere esattamente a una delle due sottoclassi.
 
 ---
 
