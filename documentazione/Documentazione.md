@@ -86,7 +86,7 @@ La specializzazione è **totale**, poiché ogni cliente registrato nel sistema d
 
 ### 1.4.1 Modello E-R concettuale — Generalizzazione non risolta
 
-Prima di scegliere come tradurre la generalizzazione nel modello logico relazionale, il punto di partenza è il **modello E-R concettuale**, che rappresenta il dominio così com'è, senza ancora prendere alcuna decisione implementativa. In questo diagramma, CLIENTE è l'entità generalizzata che "contiene" logicamente tutti gli attributi, mentre PRIVATO e AZIENDA sono le due sottoclassi specializzate: la struttura della generalizzazione è visibile (cerchio G con le frecce verso le due sottoclassi), ma non è ancora stato deciso quale delle tre strategie di traduzione adottare.
+Prima di scegliere come tradurre la generalizzazione nel modello logico relazionale, il punto di partenza è il **modello E-R concettuale**, che rappresenta il dominio così com'è, senza ancora prendere alcuna decisione implementativa. In questo diagramma, CLIENTE è l'unica entità che raccoglie tutti gli attributi: quelli comuni a ogni cliente (email, telefono, città) e quelli specifici per tipo (codice_fiscale, nome, cognome, data_nascita per i privati; partita_iva, ragione_sociale, settore per le aziende), ancora non separati in sottoclassi distinte.
 
 Il problema aperto è: come tradurre questa struttura in tabelle relazionali? Gli attributi tratteggiati di CLIENTE (codice_fiscale, nome, cognome, data_nascita per i privati; partita_iva, ragione_sociale, settore per le aziende) non possono stare tutti in un'unica tabella senza sprechi o NULL. Le sezioni successive descrivono i tre approcci possibili.
 
