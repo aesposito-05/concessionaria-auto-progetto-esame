@@ -25,8 +25,8 @@
   <text x="307" y="471" fill="#555" font-size="10">(1,1)</text>
 
   <!-- ── effettua PRIVATO → rombo → VENDITA (dashed red) ── -->
-  <line x1="560" y1="175" x2="658" y2="241" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="565" y="168" fill="#555" font-size="10">(0,N)</text>
+  <line x1="565" y1="148" x2="658" y2="241" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="568" y="140" fill="#555" font-size="10">(0,N)</text>
   <line x1="722" y1="255" x2="820" y2="315" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="5,3"/>
   <text x="795" y="313" fill="#555" font-size="10">(1,1)</text>
 

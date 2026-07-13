@@ -49,12 +49,12 @@
   <text x="655" y="372" fill="#555" font-size="10">(1,1)</text>
 
   <!-- VENDITA ─── DETTAGLIO_VENDITA (N:M)  (1,N) -->
-  <line x1="875" y1="425" x2="730" y2="615" stroke="#555" stroke-width="1.5"/>
-  <text x="862" y="438" fill="#555" font-size="10">(1,N)</text>
+  <line x1="920" y1="445" x2="730" y2="615" stroke="#555" stroke-width="1.5"/>
+  <text x="908" y="458" fill="#555" font-size="10">(1,N)</text>
 
   <!-- AUTO ─── DETTAGLIO_VENDITA (N:M)  (0,N) -->
-  <line x1="360" y1="320" x2="594" y2="615" stroke="#555" stroke-width="1.5"/>
-  <text x="368" y="348" fill="#555" font-size="10">(0,N)</text>
+  <line x1="310" y1="335" x2="594" y2="615" stroke="#555" stroke-width="1.5"/>
+  <text x="316" y="356" fill="#555" font-size="10">(0,N)</text>
 
   <!-- ══════════════════════════════════════════
        TABELLE

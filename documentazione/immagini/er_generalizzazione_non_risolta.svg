@@ -26,8 +26,8 @@
   <text x="316" y="456" fill="#555" font-size="10">(1,1)</text>
 
   <!-- effettua: CLIENTE → VENDITA -->
-  <line x1="620" y1="165" x2="720" y2="235" stroke="#555" stroke-width="1.5"/>
-  <text x="624" y="158" fill="#555" font-size="10">(0,N)</text>
+  <line x1="655" y1="170" x2="720" y2="235" stroke="#555" stroke-width="1.5"/>
+  <text x="658" y="163" fill="#555" font-size="10">(0,N)</text>
   <line x1="784" y1="235" x2="860" y2="290" stroke="#555" stroke-width="1.5"/>
   <text x="838" y="285" fill="#555" font-size="10">(1,1)</text>
 
@@ -38,8 +38,8 @@
   <text x="962" y="273" fill="#555" font-size="10">(1,1)</text>
 
   <!-- VENDITA → DETTAGLIO_VENDITA -->
-  <line x1="860" y1="390" x2="730" y2="530" stroke="#555" stroke-width="1.5"/>
-  <text x="855" y="405" fill="#555" font-size="10">(1,N)</text>
+  <line x1="900" y1="408" x2="730" y2="530" stroke="#555" stroke-width="1.5"/>
+  <text x="906" y="422" fill="#555" font-size="10">(1,N)</text>
 
   <!-- AUTO → DETTAGLIO_VENDITA -->
   <line x1="360" y1="335" x2="594" y2="530" stroke="#555" stroke-width="1.5"/>
