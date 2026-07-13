@@ -22,6 +22,7 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
    - 1.2 Entità e attributi
    - 1.3 Relazioni
    - 1.4 Generalizzazione e specializzazione
+   - 1.4.1 Modello E-R concettuale — Generalizzazione non risolta
    - 1.5 Scenari alternativi scartati e loro problemi
    - 1.6 Soluzione adottata — Diagramma E-R con tre tabelle
    - 1.7 Derivazione della generalizzazione
@@ -82,6 +83,14 @@ Dal basso (approccio bottom-up): **Privato** e **Azienda** emergono come due tip
 Dall'alto (approccio top-down): partendo dall'entità Cliente, si riconosce la necessità di specializzarla perché non tutti i clienti condividono gli stessi attributi specifici: un cliente privato necessita di nome, cognome, codice fiscale e data di nascita, mentre un'azienda necessita di ragione sociale, partita IVA e settore di attività.
 
 La specializzazione è **totale**, poiché ogni cliente registrato nel sistema deve obbligatoriamente essere o un privato o un'azienda — non esistono clienti "generici" privi di una delle due caratterizzazioni. È inoltre **esclusiva**, poiché un singolo cliente non può appartenere a entrambe le categorie contemporaneamente. Totalità ed esclusività, insieme, definiscono una **partizione completa** dell'entità Cliente nelle due sottoclassi Privato e Azienda.
+
+### 1.4.1 Modello E-R concettuale — Generalizzazione non risolta
+
+Prima di scegliere come tradurre la generalizzazione nel modello logico relazionale, il punto di partenza è il **modello E-R concettuale**, che rappresenta il dominio così com'è, senza ancora prendere alcuna decisione implementativa. In questo diagramma, CLIENTE è l'entità generalizzata che "contiene" logicamente tutti gli attributi, mentre PRIVATO e AZIENDA sono le due sottoclassi specializzate: la struttura della generalizzazione è visibile (cerchio G con le frecce verso le due sottoclassi), ma non è ancora stato deciso quale delle tre strategie di traduzione adottare.
+
+Il problema aperto è: come tradurre questa struttura in tabelle relazionali? Gli attributi tratteggiati di CLIENTE (codice_fiscale, nome, cognome, data_nascita per i privati; partita_iva, ragione_sociale, settore per le aziende) non possono stare tutti in un'unica tabella senza sprechi o NULL. Le sezioni successive descrivono i tre approcci possibili.
+
+![Modello E-R concettuale — Generalizzazione non risolta](immagini/er_generalizzazione_non_risolta.svg)
 
 ### 1.5 Scenari alternativi scartati e loro problemi
 
