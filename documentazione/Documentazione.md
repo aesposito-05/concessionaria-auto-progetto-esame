@@ -92,6 +92,12 @@ Il problema aperto è: come tradurre questa struttura in tabelle relazionali? Gl
 
 ![Modello E-R concettuale — Generalizzazione non risolta](immagini/er_generalizzazione_non_risolta.svg)
 
+Tenere tutti gli attributi in un'unica tabella CLIENTE introduce tre problemi strutturali:
+
+- **Valori NULL obbligatori**: ogni riga avrà sempre metà degli attributi vuoti. Un cliente privato non ha partita_iva né ragione_sociale; un'azienda non ha codice_fiscale né data_nascita. I NULL non rappresentano dati mancanti ma dati strutturalmente inapplicabili.
+- **Nessuna integrità strutturale**: il database non è in grado di imporre che un privato abbia sempre codice_fiscale compilato, né che un'azienda abbia sempre partita_iva. Questi vincoli devono essere gestiti interamente a livello applicativo, con il rischio di incoerenze.
+- **Query più fragili**: qualsiasi interrogazione che distingua privati da aziende richiede un filtro esplicito sul campo tipo_cliente, rendendo le query più complesse e difficili da manutenere.
+
 ### 1.5 Scenari alternativi scartati e loro problemi
 
 Per tradurre a livello logico la generalizzazione Cliente → Privato/Azienda esistono tre approcci principali. I primi due sono stati analizzati e scartati perché introducono problemi strutturali; il terzo — descritto nel paragrafo 1.6 — è quello adottato nel progetto.
