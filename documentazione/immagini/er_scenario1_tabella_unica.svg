@@ -10,13 +10,13 @@
   <line x1="160" y1="135" x2="168" y2="188" stroke="#555" stroke-width="1.5"/>
   <text x="163" y="125" fill="#555" font-size="10">(0,N)</text>
   <line x1="232" y1="188" x2="230" y2="220" stroke="#555" stroke-width="1.5"/>
-  <text x="233" y="218" fill="#555" font-size="10">(1,1)</text>
+  <text x="212" y="210" fill="#555" font-size="10">(1,1)</text>
 
   <!-- ── fornisce: FORNITORE → rombo → AUTO ── -->
   <line x1="160" y1="335" x2="168" y2="293" stroke="#555" stroke-width="1.5"/>
   <text x="163" y="342" fill="#555" font-size="10">(0,N)</text>
   <line x1="232" y1="293" x2="230" y2="268" stroke="#555" stroke-width="1.5"/>
-  <text x="233" y="265" fill="#555" font-size="10">(1,1)</text>
+  <text x="212" y="258" fill="#555" font-size="10">(1,1)</text>
 
   <!-- ── richiede: AUTO → rombo → MANUTENZIONE ── -->
   <line x1="305" y1="330" x2="303" y2="391" stroke="#555" stroke-width="1.5"/>
