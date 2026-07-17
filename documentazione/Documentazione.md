@@ -424,6 +424,25 @@ END;
 
 Dopo ogni inserimento in `cliente`, verifica che il campo `tipo_cliente` sia valido. Questo trigger implementa il vincolo interrelazionale di totalità ed esclusività della specializzazione descritto nella sezione 1.8: ogni cliente deve appartenere esattamente a una delle due sottoclassi.
 
+**Trigger 3 — Aggiorna l'importo totale della vendita dopo ogni dettaglio**
+
+```sql
+CREATE TRIGGER aggiorna_importo_vendita
+AFTER INSERT ON dettaglio_vendita
+FOR EACH ROW
+BEGIN
+    UPDATE vendita
+    SET importo_totale = (
+        SELECT SUM(quantita * prezzo_unitario)
+        FROM dettaglio_vendita
+        WHERE id_vendita = NEW.id_vendita
+    )
+    WHERE id_vendita = NEW.id_vendita;
+END;
+```
+
+Ogni volta che viene inserita una riga in `dettaglio_vendita`, il trigger ricalcola la somma di `quantita * prezzo_unitario` per tutti i dettagli associati a quella vendita e aggiorna di conseguenza il campo `importo_totale` nella tabella `vendita`. Questo trigger implementa il vincolo interrelazionale di coerenza importo descritto nella sezione 1.10: il totale della vendita deve sempre corrispondere alla somma dei suoi dettagli, senza affidarsi alla logica applicativa.
+
 ---
 
 ## 3. Implementazione del sistema informativo
