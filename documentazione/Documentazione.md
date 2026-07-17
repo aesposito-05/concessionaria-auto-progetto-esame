@@ -90,7 +90,6 @@ Prima di scegliere come tradurre la generalizzazione nel modello logico relazion
 
 Il problema aperto è: come tradurre questa struttura in tabelle relazionali? Gli attributi tratteggiati di CLIENTE (codice_fiscale, nome, cognome, data_nascita per i privati; partita_iva, ragione_sociale, settore per le aziende) non possono stare tutti in un'unica tabella senza sprechi o NULL. Le sezioni successive descrivono i tre approcci possibili.
 
-![Modello E-R concettuale — Generalizzazione non risolta](immagini/er_generalizzazione_non_risolta.svg)
 
 Tenere tutti gli attributi in un'unica tabella CLIENTE introduce tre problemi strutturali:
 
@@ -111,7 +110,6 @@ Si crea una sola tabella `cliente` che contiene tutti gli attributi sia di Priva
 
 Per questi motivi lo **Scenario 1 è stato scartato**.
 
-![Diagramma E-R Scenario 1 - tabella unica (scartato)](immagini/er_scenario1_tabella_unica.svg)
 
 **Scenario 2 — Solo le due tabelle figlie, senza tabella padre (scartato)**
 
@@ -123,7 +121,6 @@ Si creano solo `privato` e `azienda`, senza una tabella `cliente` comune. Anche 
 
 Per questi motivi lo **Scenario 2 è stato scartato**.
 
-![Diagramma E-R Scenario 2 - due tabelle senza padre (scartato)](immagini/er_scenario2_due_tabelle.svg)
 
 ### 1.6 Soluzione adottata — Diagramma E-R con tre tabelle
 
@@ -134,7 +131,6 @@ Entrambi gli scenari alternativi sono stati scartati. La soluzione adottata è l
 - *Un'unica chiave esterna in Vendita:* `vendita` punta sempre e solo a `cliente` tramite `id_cliente`, indipendentemente dal fatto che il cliente sia privato o aziendale. Non servono due colonne separate.
 - *Specializzazione garantita:* `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Ogni riga di `cliente` corrisponde esattamente a una riga in `privato` oppure in `azienda`.
 
-![Diagramma E-R completo — soluzione adottata](immagini/er_completo.svg)
 
 *Nota: nel diagramma ogni tabella riporta le proprie chiavi primarie (PK), chiavi esterne (FK) e le cardinalità minima e massima di ciascuna relazione. La specializzazione è indicata con frecce tratteggiate verdi e con la nota "PK = FK (OneToOne)": ogni cliente ha esattamente una riga corrispondente in Privato oppure in Azienda.*
 
