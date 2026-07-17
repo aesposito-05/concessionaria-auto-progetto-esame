@@ -84,6 +84,10 @@ Dall'alto (approccio top-down): partendo dall'entità Cliente, si riconosce la n
 
 La specializzazione è **totale**, poiché ogni cliente registrato nel sistema deve obbligatoriamente essere o un privato o un'azienda — non esistono clienti "generici" privi di una delle due caratterizzazioni. È inoltre **esclusiva**, poiché un singolo cliente non può appartenere a entrambe le categorie contemporaneamente. Totalità ed esclusività, insieme, definiscono una **partizione completa** dell'entità Cliente nelle due sottoclassi Privato e Azienda.
 
+![Modello concettuale — generalizzazione Cliente](immagini/modello_concettuale_generalizzazione.svg)
+
+Il diagramma sopra rappresenta il modello concettuale con il simbolo ISA: Cliente si specializza in Privato e Azienda, con partizione totale ed esclusiva. Questo è il punto di partenza teorico; le tre sottosezioni seguenti mostrano invece le diverse strategie con cui questa generalizzazione può essere *tradotta* in tabelle relazionali.
+
 ### 1.5 Strategie di traduzione della generalizzazione
 
 ---
