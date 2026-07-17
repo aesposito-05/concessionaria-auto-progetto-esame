@@ -92,7 +92,7 @@ La specializzazione è **totale**, poiché ogni cliente registrato nel sistema d
 
 La generalizzazione non viene risolta: si crea un'unica tabella `cliente` che raccoglie tutti gli attributi sia della classe padre che delle due sottoclassi.
 
-[diagramma scenario 1]
+![Scenario 1 — Accorpamento verso il padre](immagini/scenario1_accorpamento_padre.svg)
 
 Problemi di questo approccio:
 
@@ -105,7 +105,7 @@ Problemi di questo approccio:
 
 Gli attributi della classe padre vengono copiati in ciascuna sottoclasse: si creano solo le tabelle `privato` e `azienda`, senza una tabella `cliente` comune.
 
-[diagramma scenario 2]
+![Scenario 2 — Accorpamento verso i figli](immagini/scenario2_accorpamento_figli.svg)
 
 Problemi di questo approccio:
 
@@ -118,7 +118,7 @@ Problemi di questo approccio:
 
 Si mantengono tre tabelle distinte — `cliente`, `privato` e `azienda`. `cliente` contiene gli attributi comuni; `privato` e `azienda` contengono solo gli attributi specifici e sono collegate a `cliente` tramite una relazione 1:1.
 
-[diagramma scenario 3]
+![Scenario 3 — Tre tabelle: padre e figli](immagini/scenario3_tre_tabelle.svg)
 
 Vantaggi di questo approccio:
 
