@@ -26,10 +26,9 @@ Il documento è organizzato in cinque parti: la progettazione concettuale del da
      - Scenario 1 — Accorpamento verso il padre (una sola tabella)
      - Scenario 2 — Accorpamento verso i figli (due tabelle)
      - Scenario 3 — Tre tabelle: padre e figli (soluzione adottata)
-   - 1.6 Derivazione della generalizzazione
-   - 1.7 Semplificazioni e adattamenti
-   - 1.8 Vincoli principali
-   - 1.9 Vincoli interrelazionali
+   - 1.6 Semplificazioni e adattamenti
+   - 1.7 Vincoli principali
+   - 1.8 Vincoli interrelazionali
 2. Progettazione logica
    - 2.1 Regole di derivazione
    - 2.2 Elenco delle entità e degli attributi
@@ -87,13 +86,11 @@ La specializzazione è **totale**, poiché ogni cliente registrato nel sistema d
 
 ### 1.5 Strategie di traduzione della generalizzazione
 
-Per tradurre a livello logico la generalizzazione Cliente → Privato/Azienda esistono tre strategie principali. Vengono presentate tutte e tre con i rispettivi vantaggi e problemi; la terza è quella adottata nel progetto.
-
 ---
 
 #### Scenario 1 — Accorpamento verso il padre (una sola tabella)
 
-La generalizzazione non viene risolta: si crea un'unica tabella `cliente` che raccoglie tutti gli attributi sia della classe padre che delle due sottoclassi. Gli attributi specifici di privato e azienda convivono nella stessa riga, con un campo `tipo_cliente` che distingue i due casi.
+La generalizzazione non viene risolta: si crea un'unica tabella `cliente` che raccoglie tutti gli attributi sia della classe padre che delle due sottoclassi.
 
 [diagramma scenario 1]
 
@@ -101,7 +98,6 @@ Problemi di questo approccio:
 
 - **Valori NULL obbligatori**: ogni riga avrà sempre metà degli attributi vuoti. Un cliente privato avrà `partita_iva`, `ragione_sociale` e `settore` sempre NULL; un'azienda avrà `codice_fiscale`, `nome`, `cognome` e `data_nascita` sempre NULL.
 - **Nessuna integrità strutturale**: il database non può imporre che un privato abbia sempre `codice_fiscale`, né che un'azienda abbia sempre `partita_iva`. Questi vincoli devono essere gestiti a livello applicativo.
-- **Query più fragili**: qualsiasi interrogazione che distingua privati da aziende richiede un filtro esplicito su `tipo_cliente`.
 
 ---
 
@@ -115,13 +111,12 @@ Problemi di questo approccio:
 
 - **Attributi duplicati**: `email`, `telefono` e `citta` devono essere ripetuti in entrambe le tabelle, violando il principio di non ridondanza.
 - **Ricerca su cliente generico impossibile**: per trovare un cliente per email occorre interrogare entrambe le tabelle con una UNION.
-- **Doppia chiave esterna in Vendita**: la tabella `vendita` dovrebbe avere due colonne — `id_privato` e `id_azienda` — di cui solo una per riga è valorizzata e l'altra è sempre NULL.
 
 ---
 
 #### Scenario 3 — Tre tabelle: padre e figli (soluzione adottata)
 
-La strategia adottata è **"tabella per ogni entità"** (*table per subclass*): si mantengono tre tabelle distinte — `cliente`, `privato` e `azienda`. `cliente` contiene gli attributi comuni; `privato` e `azienda` contengono solo gli attributi specifici e sono collegate a `cliente` tramite una relazione 1:1.
+Si mantengono tre tabelle distinte — `cliente`, `privato` e `azienda`. `cliente` contiene gli attributi comuni; `privato` e `azienda` contengono solo gli attributi specifici e sono collegate a `cliente` tramite una relazione 1:1.
 
 [diagramma scenario 3]
 
@@ -129,18 +124,12 @@ Vantaggi di questo approccio:
 
 - **Nessun valore NULL strutturale**: ogni colonna contiene dati reali per il tipo a cui appartiene.
 - **Nessuna ridondanza**: gli attributi comuni sono scritti una sola volta in `cliente`.
-- **Un'unica chiave esterna in Vendita**: `vendita` punta sempre e solo a `cliente` tramite `id_cliente`, indipendentemente dal tipo di cliente.
-- **Specializzazione garantita**: ogni riga di `cliente` corrisponde esattamente a una riga in `privato` oppure in `azienda`.
 
-### 1.6 Derivazione della generalizzazione
-
-Per tradurre la generalizzazione Cliente → Privato/Azienda è stata adottata la strategia "tabella per ogni entità": una tabella `cliente` contiene gli attributi comuni, mentre `privato` e `azienda` hanno come chiave primaria lo stesso `id_cliente`, che è anche chiave esterna verso `cliente` (relazione 1:1 di tipo "is-a"). Questa strategia è preferibile rispetto a un'unica tabella con tutti gli attributi (che produrrebbe molti valori NULL) perché mantiene lo schema normalizzato, al costo di richiedere un JOIN per ricostruire il profilo completo di un cliente.
-
-### 1.7 Semplificazioni e adattamenti
+### 1.6 Semplificazioni e adattamenti
 
 Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dichiarativo, che ogni riga di `cliente` abbia esattamente una riga corrispondente in `privato` oppure in `azienda`: il vincolo di totalità ed esclusività della partizione richiederebbe un trigger che verifichi l'esistenza incrociata fra tabelle ogni volta che viene inserito un cliente. Per restare entro i limiti di un progetto didattico, è stato introdotto in `cliente` un attributo discriminante `tipo_cliente`, vincolato tramite CHECK ai valori `privato` e `azienda`, demandando all'applicazione Django la responsabilità di creare sempre la riga di specializzazione corretta al momento della registrazione di un nuovo cliente. È una scelta pragmatica, dichiarata esplicitamente come semplificazione rispetto al modello concettuale puro.
 
-### 1.8 Vincoli principali
+### 1.7 Vincoli principali
 
 | Tabella | Vincolo |
 |---|---|
@@ -152,7 +141,7 @@ Lo standard SQL non permette di imporre nativamente, con un semplice vincolo dic
 | dettaglio_vendita | PK composta (id_vendita, id_auto); `quantita`/`prezzo_unitario` CHECK (> 0) |
 | manutenzione | `id_auto` FK NOT NULL |
 
-### 1.9 Vincoli interrelazionali
+### 1.8 Vincoli interrelazionali
 
 I vincoli interrelazionali coinvolgono più tabelle contemporaneamente e non possono essere espressi con un semplice CHECK su una singola colonna. Richiederebbero trigger o logica applicativa per essere imposti a livello di database.
 
