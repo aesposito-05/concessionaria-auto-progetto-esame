@@ -210,6 +210,8 @@ CLIENTE(
 )
 ```
 
+*Nota sull'implementazione: il modello Django `Cliente` include anche un campo `user` (`OneToOneField` verso il modello utente integrato di Django), non presente nello schema concettuale. È stato predisposto come base per un futuro accesso self-service dei clienti al sistema, ma al momento non è utilizzato da nessuna view o template.*
+
 **PRIVATO**
 ```
 PRIVATO(
@@ -277,6 +279,8 @@ MANUTENZIONE(
 ```
 
 *Nota: in `DETTAGLIO_VENDITA`, l'indicazione "PK/FK" significa che l'attributo è contemporaneamente chiave primaria della tabella e chiave esterna verso un'altra tabella. In `PRIVATO` e `AZIENDA` invece ogni tabella ha una propria chiave primaria autonoma (`id_privato`, `id_azienda`) e una chiave esterna `id_cliente` con vincolo UNIQUE verso `CLIENTE`, realizzando così la relazione 1:1 di specializzazione.*
+
+*Nota sull'implementazione: lo schema sopra descrive la soluzione concettualmente corretta per una tabella ponte (chiave primaria composta). Nel codice Django reale, `DettaglioVendita` usa invece una chiave primaria surrogata autoincrementale (`id`) con un vincolo `UniqueConstraint(vendita, auto)` — pattern più idiomatico per l'ORM di Django, che storicamente non supporta nativamente le chiavi primarie composte. Il vincolo di unicità sulla coppia è comunque garantito, in modo equivalente.*
 
 ### 2.3 Script di creazione delle tabelle
 
@@ -428,7 +432,7 @@ BEGIN
 END;
 ```
 
-Ogni volta che viene inserita una riga in `dettaglio_vendita`, il trigger ricalcola la somma di `quantita * prezzo_unitario` per tutti i dettagli associati a quella vendita e aggiorna di conseguenza il campo `importo_totale` nella tabella `vendita`. Questo trigger implementa il vincolo interrelazionale di coerenza importo descritto nella sezione 1.10: il totale della vendita deve sempre corrispondere alla somma dei suoi dettagli, senza affidarsi alla logica applicativa.
+Ogni volta che viene inserita una riga in `dettaglio_vendita`, il trigger ricalcola la somma di `quantita * prezzo_unitario` per tutti i dettagli associati a quella vendita e aggiorna di conseguenza il campo `importo_totale` nella tabella `vendita`. Questo trigger implementa il vincolo interrelazionale di coerenza importo descritto nella sezione 1.8: il totale della vendita deve sempre corrispondere alla somma dei suoi dettagli, senza affidarsi alla logica applicativa.
 
 ---
 

@@ -1,6 +1,6 @@
 -- ============================================================
 -- Trigger della concessionaria auto
--- Implementano i vincoli interrelazionali della sezione 1.10
+-- Implementano i vincoli interrelazionali della sezione 1.8
 -- ============================================================
 
 -- Trigger 1: aggiorna lo stato dell'auto a "venduta" dopo una vendita
