@@ -56,6 +56,28 @@
       </tbody>
     </table>
 
+    {% if auto.manutenzioni.exists %}
+    <h5 class="mt-4">Storico manutenzioni</h5>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Descrizione</th>
+          <th>Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in auto.manutenzioni.all %}
+        <tr>
+          <td>{{ m.data_intervento|default:"—" }}</td>
+          <td>{{ m.descrizione|default:"—" }}</td>
+          <td>{% if m.costo %}€ {{ m.costo }}{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
     <a href="{% url 'lista_auto' %}" class="btn btn-outline-secondary btn-sm">
       Torna al catalogo
     </a>
