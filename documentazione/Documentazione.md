@@ -378,7 +378,7 @@ CREATE TABLE manutenzione (
 
 ### 2.4 Trigger
 
-I trigger seguenti non sono implementati nel codice Django (che gestisce la logica applicativa tramite i modelli), ma vengono riportati a titolo esemplificativo per mostrare come i vincoli e le regole di business potrebbero essere imposti direttamente a livello di database.
+I trigger seguenti sono effettivamente implementati a livello di database, tramite la migration Django `gestionale/migrations/0003_triggers.py` (che usa `migrations.RunSQL` per creare i trigger direttamente in SQLite), in aggiunta alla logica applicativa gestita dai modelli. La sintassi mostrata di seguito è espressa in stile SQL standard per chiarezza espositiva; l'implementazione reale in SQLite usa una sintassi leggermente diversa (clausola `WHEN` e `RAISE(ABORT, ...)` al posto di `SIGNAL SQLSTATE`), visibile direttamente nel file di migration.
 
 **Trigger 1 — Aggiorna lo stato dell'auto a "venduta" dopo una vendita**
 

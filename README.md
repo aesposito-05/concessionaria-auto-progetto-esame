@@ -15,7 +15,7 @@ python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # macOS/Linux
 pip install -r requirements.txt
-python manage.py migrate
-python manage.py loaddata dati_esempio.json
 python manage.py runserver
 ```
+
+> **Nota**: il file `db.sqlite3` è incluso nel repository e contiene già i dati di esempio. Non è necessario eseguire migrazioni né caricare dati separatamente.
